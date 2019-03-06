@@ -13,6 +13,22 @@ import {Button,Provider,Toast,Drawer, List,Accordion,Icon,Flex} from '@ant-desig
 import Toolbar from "./components/Toolbar";
 import {connect} from 'react-redux';
 import MasterPage from './components/MasterPage';
+import HomeScreen from './components/HomeScreen';
+import {createAppContainer, createStackNavigator} from "react-navigation";
+
+const AppNavigator = createStackNavigator(
+    {
+        Home: HomeScreen,
+        MasterPage:MasterPage
+    },
+    {
+        initialRouteName:'Home',
+        defaultNavigationOptions:{//配置导航栏默认样式
+
+        }
+    }
+);
+const AppContainer = createAppContainer(AppNavigator);
 
 type Props = {};
 class App extends Component<Props> {
@@ -63,8 +79,8 @@ class App extends Component<Props> {
                                                 return (
                                                     <List.Item key={item.id} style={styles.listItem} onPress={switchPage.bind(this,item.module)}>
                                                         <Flex direction={'row'}>
-                                                            <Flex.Item flex={1}><Icon name={item.icon} style={{color:item.module===activePage?'#1890ff':'#595959'}}/></Flex.Item>
-                                                            <Flex.Item flex={4}><Text style={{color:item.module===activePage?'#1890ff':'#595959'}}>{item.name}</Text></Flex.Item>
+                                                            <Flex.Item flex={1}><Icon name={item.icon} style={{color:item.id===activePage?'#1890ff':'#595959'}}/></Flex.Item>
+                                                            <Flex.Item flex={4}><Text style={{color:item.id===activePage?'#1890ff':'#595959'}}>{item.name}</Text></Flex.Item>
                                                         </Flex>
                                                     </List.Item>
                                                 )
@@ -81,20 +97,21 @@ class App extends Component<Props> {
         return (
             <Provider>
                 <View style={styles.containers}>
-                    <Drawer
-                        sidebar={sidebar}
-                        position="left"
-                        open={openState}
-                        drawerRef={el => (this.drawer = el)}
-                        drawerWidth={300}
-                        onOpenChange={toggleSidebar}
-                        drawerBackgroundColor="#ccc"
-                    >
-                        <View style={{ flex: 1 }}>
-                            <Toolbar handleNavClick={toggleSidebar}/>
-                            <MasterPage/>
-                        </View>
-                    </Drawer>
+                    {/*<Drawer*/}
+                        {/*sidebar={sidebar}*/}
+                        {/*position="left"*/}
+                        {/*open={openState}*/}
+                        {/*drawerRef={el => (this.drawer = el)}*/}
+                        {/*drawerWidth={300}*/}
+                        {/*onOpenChange={toggleSidebar}*/}
+                        {/*drawerBackgroundColor="#ccc"*/}
+                    {/*>*/}
+                        {/*<View style={{ flex: 1 }}>*/}
+                            {/*<Toolbar handleNavClick={toggleSidebar}/>*/}
+                            {/*<MasterPage/>*/}
+                        {/*</View>*/}
+                    {/*</Drawer>*/}
+                    <AppContainer/>
                 </View>
             </Provider>
         );
