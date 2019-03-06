@@ -21,6 +21,11 @@ class MasterPage extends React.Component{
     constructor(props){
         super(props);
     }
+
+    componentWillMount() {
+        // console.log('webview',this.webView)
+    }
+
     render(){
         const {activePage,switchPage} = this.props;
         return (
@@ -31,6 +36,7 @@ class MasterPage extends React.Component{
                     domStorageEnabled={true}
                     injectedJavaScript={patchPostMessageJsCode}
                     onMessage={switchPage}
+                    // ref={el=>(this.webView = el)}
                 />
             </View>
         )
