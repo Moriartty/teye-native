@@ -13,7 +13,7 @@ import {Button,Provider,Toast,Drawer, List,Accordion,Icon,Flex} from '@ant-desig
 import Toolbar from "./components/Toolbar";
 import {connect} from 'react-redux';
 import MasterPage from './components/MasterPage';
-import HomeScreen from './components/HomeScreen';
+import HomeScreen from './pages/HomeScreen';
 import {createAppContainer, createStackNavigator} from "react-navigation";
 
 const AppNavigator = createStackNavigator(
@@ -97,21 +97,22 @@ class App extends Component<Props> {
         return (
             <Provider>
                 <View style={styles.containers}>
-                    {/*<Drawer*/}
-                        {/*sidebar={sidebar}*/}
-                        {/*position="left"*/}
-                        {/*open={openState}*/}
-                        {/*drawerRef={el => (this.drawer = el)}*/}
-                        {/*drawerWidth={300}*/}
-                        {/*onOpenChange={toggleSidebar}*/}
-                        {/*drawerBackgroundColor="#ccc"*/}
-                    {/*>*/}
-                        {/*<View style={{ flex: 1 }}>*/}
+                    <Drawer
+                        sidebar={sidebar}
+                        position="left"
+                        open={openState}
+                        drawerRef={el => (this.drawer = el)}
+                        drawerWidth={300}
+                        onOpenChange={toggleSidebar}
+                        drawerBackgroundColor="#ccc"
+                    >
+                        <View style={{ flex: 1 }}>
                             {/*<Toolbar handleNavClick={toggleSidebar}/>*/}
                             {/*<MasterPage/>*/}
-                        {/*</View>*/}
-                    {/*</Drawer>*/}
-                    <AppContainer/>
+                            <AppContainer/>
+                        </View>
+                    </Drawer>
+                    {/*<MasterPage/>*/}
                 </View>
             </Provider>
         );

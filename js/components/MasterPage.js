@@ -2,6 +2,10 @@ import React from 'react';
 import {View,WebView,StyleSheet,Alert} from 'react-native';
 import {connect} from 'react-redux';
 import {patchPostMessageJsCode,findTargetMenu} from "../utils";
+import Dashboard from '../pages/Dashboard';
+import StreamView from '../pages/StreamView';
+import HomeScreen from '../pages/HomeScreen';
+
 
 
 class MasterPage extends React.Component{
@@ -12,25 +16,34 @@ class MasterPage extends React.Component{
     }
     constructor(props){
         super(props);
+        this.moduleMap = {
+            _dashboard:<Dashboard/>,
+            _streamView:<StreamView/>
+        }
     }
 
-    componentWillMount() {
-        // console.log('webview',this.webView)
+    componentWillReceiveProps(nextProps) {
+        if(this.props.activePage!==nextProps.activePage){
+            this.props.switchPage()
+        }
     }
+
 
     render(){
         const {activePage,switchPage,menu} = this.props;
         const pageModule = findTargetMenu(menu,activePage).module;
+        const Content = this.moduleMap[pageModule];
         return (
             <View style={styles.masterPage}>
-                <WebView
-                    source={{uri:'http://18.222.66.96/big-data2/'+pageModule+'.html'}}
-                    startInLoadingState={false}s
-                    domStorageEnabled={true}
-                    injectedJavaScript={patchPostMessageJsCode}
-                    onMessage={switchPage}
-                    // ref={el=>(this.webView = el)}
-                />
+                {Content}
+                {/*<WebView*/}
+                    {/*source={{uri:'http://18.222.66.96/big-data2/'+pageModule+'.html'}}*/}
+                    {/*startInLoadingState={false}*/}
+                    {/*domStorageEnabled={true}*/}
+                    {/*injectedJavaScript={patchPostMessageJsCode}*/}
+                    {/*onMessage={switchPage}*/}
+                    {/*// ref={el=>(this.webView = el)}*/}
+                {/*/>*/}
             </View>
         )
     }
@@ -47,9 +60,9 @@ MasterPage = connect(state=>{
     const {activePage,menu} = state['app'];
     return {activePage,menu};
 },dispatch=>({
-    switchPage(e){
-        dispatch({type:'APP_SWITCH_PAGE',activePage:e.nativeEvent.data})
-    }
+    // switchPage(e){
+    //     dispatch({type:'APP_SWITCH_PAGE',activePage:e.nativeEvent.data})
+    // }
 }))(MasterPage);
 
 export default MasterPage;
