@@ -13,7 +13,7 @@ import {Button,Provider,Toast,Drawer, List,Accordion,Icon,Flex} from '@ant-desig
 import Toolbar from "./components/Toolbar";
 import {connect} from 'react-redux';
 import MasterPage from './components/MasterPage';
-import HomeScreen from './pages/HomeScreen';
+import HomeScreen from './components/HomeScreen';
 import {createAppContainer, createStackNavigator} from "react-navigation";
 
 const AppNavigator = createStackNavigator(

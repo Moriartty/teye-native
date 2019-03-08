@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {patchPostMessageJsCode,findTargetMenu} from "../utils";
 import Dashboard from '../pages/Dashboard';
 import StreamView from '../pages/StreamView';
-import HomeScreen from '../pages/HomeScreen';
+import HomeScreen from './HomeScreen';
 
 
 
