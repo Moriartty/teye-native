@@ -77,7 +77,7 @@ class App extends Component<Props> {
                                         {
                                             o.list.map(item=>{
                                                 return (
-                                                    <List.Item key={item.id} style={styles.listItem} onPress={switchPage.bind(this,item.module)}>
+                                                    <List.Item key={item.id} style={styles.listItem} onPress={switchPage.bind(this,item.id)}>
                                                         <Flex direction={'row'}>
                                                             <Flex.Item flex={1}><Icon name={item.icon} style={{color:item.id===activePage?'#1890ff':'#595959'}}/></Flex.Item>
                                                             <Flex.Item flex={4}><Text style={{color:item.id===activePage?'#1890ff':'#595959'}}>{item.name}</Text></Flex.Item>

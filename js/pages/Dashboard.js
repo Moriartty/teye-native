@@ -4,7 +4,7 @@ import {patchPostMessageJsCode} from "../utils";
 
 class Dashboard extends React.Component{
     render(){
-        const switchPage = this.props;
+        const {switchPage} = this.props;
         return (
             <WebView
                 source={{uri:'http://18.222.66.96/big-data2/_dashboard.html'}}

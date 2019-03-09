@@ -27,19 +27,19 @@ const TabNavigator = createBottomTabNavigator({
             let iconName;
             switch(routeName){
                 case 'Home1':
-                    iconName = `ios-information-circle${focused ? '' : '-outline'}`;
+                    iconName = `ios-home${focused ? '' : ''}`;
                     break;
                 case 'Home2':
-                    iconName = `ios-options${focused ? '' : '-outline'}`;
+                    iconName = `ios-flag${focused ? '' : ''}`;
                     break;
                 case 'Home3':
-                    iconName = `ios-options${focused ? '' : '-outline'}`;
+                    iconName = `ios-information-circle${focused ? '' : ''}`;
                     break;
                 case 'Home4':
-                    iconName = `ios-options${focused ? '' : '-outline'}`;
+                    iconName = `ios-heart${focused ? '' : ''}`;
                     break;
                 case 'Home5':
-                    iconName = `ios-options${focused ? '' : '-outline'}`;
+                    iconName = `ios-search${focused ? '' : ''}`;
                     break;
             }
             return <IconComponent name={iconName} size={25} color={tintColor} />;
@@ -52,12 +52,9 @@ const TabNavigator = createBottomTabNavigator({
     }
 });
 
-const HomeContainer = createAppContainer(TabNavigator);
-
-
-
 
 class HomeScreen extends React.Component {
+    static router = TabNavigator.router;
     static navigationOptions = ({navigation})=>{
         return {
             title:'Home',
@@ -75,6 +72,15 @@ class HomeScreen extends React.Component {
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.activePage&&this.props.activePage!==nextProps.activePage){
+            console.log('')
+            const {navigation,menu,activePage} = nextProps;
+            const targetName = findTargetMenu(menu,activePage).name;
+            navigation.navigate('MasterPage',{activePage:targetName});
+        }
+    }
+
     handleNavClick = () => {
         const {toggleSidebar,openSidebar} = this.props;
         toggleSidebar(!openSidebar);
@@ -87,7 +93,9 @@ class HomeScreen extends React.Component {
     render() {
         const {navigation,activePage,menu} = this.props;
         return (
-            <HomeContainer/>
+            <View style={{width:'100%',height:'100%'}}>
+                <TabNavigator navigation={this.props.navigation} />
+            </View>
         );
     }
 }
@@ -97,7 +105,7 @@ HomeScreen = connect(state=>{
 },dispatch=>({
     toggleSidebar(openState){
         dispatch({type:'APP_TOGGLE_SIDEBAR',openSidebar:openState})
-    },
+    }
 }))(HomeScreen);
 
 export default HomeScreen;

@@ -2,7 +2,7 @@ import {objectAppend} from "../utils";
 
 const defaultState = {
     openSidebar:false,
-    activePage:'30',
+    activePage:'',
     menu:[
         {id:1,name:'Develop',list:[
                 {id:10,name:'Authentication',icon:'team',module:'_authentication'},
