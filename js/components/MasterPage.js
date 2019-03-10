@@ -19,6 +19,12 @@ class MasterPage extends React.Component{
             _streamView:<StreamView/>
         }
     }
+    shouldComponentUpdate(nextProps){
+        if(nextProps.activePage=='')
+            return false;
+        else
+            return true;
+    }
 
 
     render(){

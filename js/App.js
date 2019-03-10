@@ -14,7 +14,7 @@ import Toolbar from "./components/Toolbar";
 import {connect} from 'react-redux';
 import MasterPage from './components/MasterPage';
 import HomeScreen from './components/HomeScreen';
-import {createAppContainer, createStackNavigator} from "react-navigation";
+import {createAppContainer, createStackNavigator,SafeAreaView} from "react-navigation";
 
 const AppNavigator = createStackNavigator(
     {
@@ -48,50 +48,52 @@ class App extends Component<Props> {
         const {openSidebar:openState,toggleSidebar,switchPage,menu,activePage} = this.props;
         const sidebar = (
             <ScrollView style={styles.sidebar}>
-                <View style={styles.sidebarHeader}>
-                    <Flex justify={'between'}>
-                        <Flex.Item>
-                            <Image style={{width:50,height:50}}
-                               source={{uri:'https://avatars0.githubusercontent.com/u/15435074?s=460&v=4'}}/>
-                        </Flex.Item>
-                        <Flex.Item>
-                            <Flex>
-                                <Flex.Item><Icon name={'mail'} style={{color:'white'}}/></Flex.Item>
-                                <Flex.Item><Icon name={'user'} style={{color:'white'}}/></Flex.Item>
-                                <Flex.Item><Icon name={'key'} style={{color:'white'}}/></Flex.Item>
-                                <Flex.Item><Icon name={'logout'} style={{color:'white'}}/></Flex.Item>
-                            </Flex>
-                        </Flex.Item>
-                    </Flex>
-                    <Text style={{color:'white',fontSize:16,fontWeight:'bold',marginTop:10}}>Admin</Text>
-                </View>
-                <Accordion
-                    onChange={this.onChange}
-                    activeSections={this.state.activeSections}
-                    style={styles.sidebarContent}>
-                    {
-                        menu.map((o,i)=>{
-                            return (
-                                <Accordion.Panel header={o.name} key={o.id}>
-                                    <List>
-                                        {
-                                            o.list.map(item=>{
-                                                return (
-                                                    <List.Item key={item.id} style={styles.listItem} onPress={switchPage.bind(this,item.id)}>
-                                                        <Flex direction={'row'}>
-                                                            <Flex.Item flex={1}><Icon name={item.icon} style={{color:item.id===activePage?'#1890ff':'#595959'}}/></Flex.Item>
-                                                            <Flex.Item flex={4}><Text style={{color:item.id===activePage?'#1890ff':'#595959'}}>{item.name}</Text></Flex.Item>
-                                                        </Flex>
-                                                    </List.Item>
-                                                )
-                                            })
-                                        }
-                                    </List>
-                                </Accordion.Panel>
-                            )
-                        })
-                    }
-                </Accordion>
+                <SafeAreaView>
+                    <View style={styles.sidebarHeader}>
+                        <Flex justify={'between'}>
+                            <Flex.Item>
+                                <Image style={{width:50,height:50}}
+                                       source={{uri:'https://avatars0.githubusercontent.com/u/15435074?s=460&v=4'}}/>
+                            </Flex.Item>
+                            <Flex.Item>
+                                <Flex>
+                                    <Flex.Item><Icon name={'mail'} style={{color:'white'}}/></Flex.Item>
+                                    <Flex.Item><Icon name={'user'} style={{color:'white'}}/></Flex.Item>
+                                    <Flex.Item><Icon name={'key'} style={{color:'white'}}/></Flex.Item>
+                                    <Flex.Item><Icon name={'logout'} style={{color:'white'}}/></Flex.Item>
+                                </Flex>
+                            </Flex.Item>
+                        </Flex>
+                        <Text style={{color:'white',fontSize:16,fontWeight:'bold',marginTop:10}}>Admin</Text>
+                    </View>
+                    <Accordion
+                        onChange={this.onChange}
+                        activeSections={this.state.activeSections}
+                        style={styles.sidebarContent}>
+                        {
+                            menu.map((o,i)=>{
+                                return (
+                                    <Accordion.Panel header={o.name} key={o.id}>
+                                        <List>
+                                            {
+                                                o.list.map(item=>{
+                                                    return (
+                                                        <List.Item key={item.id} style={styles.listItem} onPress={switchPage.bind(this,item.id)}>
+                                                            <Flex direction={'row'}>
+                                                                <Flex.Item flex={1}><Icon name={item.icon} style={{color:item.id===activePage?'#1890ff':'#595959'}}/></Flex.Item>
+                                                                <Flex.Item flex={4}><Text style={{color:item.id===activePage?'#1890ff':'#595959'}}>{item.name}</Text></Flex.Item>
+                                                            </Flex>
+                                                        </List.Item>
+                                                    )
+                                                })
+                                            }
+                                        </List>
+                                    </Accordion.Panel>
+                                )
+                            })
+                        }
+                    </Accordion>
+                </SafeAreaView>
             </ScrollView>
         );
         return (
@@ -109,7 +111,12 @@ class App extends Component<Props> {
                         <View style={{ flex: 1 }}>
                             {/*<Toolbar handleNavClick={toggleSidebar}/>*/}
                             {/*<MasterPage/>*/}
-                            <AppContainer/>
+                            <AppContainer onNavigationStateChange={
+                                (preState,newState,action)=>{
+                                    console.log(newState)
+                                    if(newState.routes.length==1&&newState.routes[0].routeName=='Home')
+                                        switchPage('');
+                                }}/>
                         </View>
                     </Drawer>
                     {/*<MasterPage/>*/}

@@ -3,7 +3,7 @@ import React from "react";
 import { View, Text,Button,Image,TouchableOpacity } from "react-native";
 import {connect} from 'react-redux';
 import {findTargetMenu} from "../utils/index";
-const theme = require('../theme');
+const theme = require('../config/theme');
 import {createAppContainer, createBottomTabNavigator} from "react-navigation";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Home1 from '../pages/Home1';
