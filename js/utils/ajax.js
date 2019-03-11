@@ -1,9 +1,9 @@
-import config from 'config/api';
+import config from '../config/api';
 import $ajax from 'tf-utils/lib/ajax';
-import { message } from 'antd';
+// import { message } from 'antd';
 // const ReactDOM = require('react-dom');
 // const Err50x = (cb) => { require.ensure([], require => { cb(require('pages/Error/50x')); }); };
-import {apiTest} from 'config/api';
+import {apiTest} from '../config/api';
 
 function ajax (method, url, data = {}, baseUrl, isRaw, isFormData) {
     if (apiTest.indexOf(url) == -1) {
@@ -34,7 +34,7 @@ function ajax (method, url, data = {}, baseUrl, isRaw, isFormData) {
                 resolve(json.data);
             } else {
                 // key不匹配
-                message.error(json.msg);
+                // message.error(json.msg);
                 // eslint-disable-next-line
                 if (json.code == 1003) {
                     location.href = 'login.html';
@@ -49,7 +49,7 @@ function ajax (method, url, data = {}, baseUrl, isRaw, isFormData) {
                 //     ReactDOM.render(React.createElement(component), document.getElementById('container'));
                 // });
             } else {
-                message.error('【' + status + '】' + statusText);
+                // message.error('【' + status + '】' + statusText);
             }
         });
     });

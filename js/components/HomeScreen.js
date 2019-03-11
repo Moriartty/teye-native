@@ -6,19 +6,19 @@ import {findTargetMenu} from "../utils/index";
 const theme = require('../config/theme');
 import {createAppContainer, createBottomTabNavigator} from "react-navigation";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import Home1 from '../pages/Home1';
-import Home2 from '../pages/Home2';
-import Home3 from '../pages/Home3';
-import Home4 from '../pages/Home4';
-import Home5 from '../pages/Home5';
+import UserPortrait from '../pages/UserPortrait';
+import PainPoint from '../pages/PainPoint';
+import Activation from '../pages/Activation';
+import Habit from '../pages/Habit';
+import Duration from '../pages/Duration';
 
 
 const TabNavigator = createBottomTabNavigator({
-    Home1: Home1,
-    Home2: Home2,
-    Home3: Home3,
-    Home4: Home4,
-    Home5: Home5,
+    Portrait: UserPortrait,
+    PainPoint: PainPoint,
+    Activation: Activation,
+    Habit: Habit,
+    Duration: Duration,
 },{
     defaultNavigationOptions: ({ navigation }) => ({
         tabBarIcon: ({ focused, horizontal, tintColor }) => {
@@ -26,19 +26,19 @@ const TabNavigator = createBottomTabNavigator({
             let IconComponent = Ionicons;
             let iconName;
             switch(routeName){
-                case 'Home1':
+                case 'Portrait':
                     iconName = `ios-home${focused ? '' : ''}`;
                     break;
-                case 'Home2':
+                case 'PainPoint':
                     iconName = `ios-flag${focused ? '' : ''}`;
                     break;
-                case 'Home3':
+                case 'Activation':
                     iconName = `ios-information-circle${focused ? '' : ''}`;
                     break;
-                case 'Home4':
+                case 'Habit':
                     iconName = `ios-heart${focused ? '' : ''}`;
                     break;
-                case 'Home5':
+                case 'Duration':
                     iconName = `ios-search${focused ? '' : ''}`;
                     break;
             }
@@ -47,7 +47,7 @@ const TabNavigator = createBottomTabNavigator({
     }),
     tabBarOptions: {
         labelStyle: {
-            fontSize: 13,
+            fontSize: 12,
         },
     }
 });

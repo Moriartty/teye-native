@@ -1,13 +1,13 @@
 import React from 'react';
 import { Text, View,Image } from 'react-native';
 
-class Home4 extends React.Component {
+class Habit extends React.Component {
     render() {
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text>Home4!</Text>
+                <Text>Habit!</Text>
             </View>
         );
     }
 }
-export default Home4;
+export default Habit;

@@ -1,127 +1,88 @@
-/**
- * Created by user on 18-8-20.
- */
-// import echarts from 'echarts/lib/echarts';
-// import React from 'react';
-// 引入柱状图
-// require('echarts/lib/chart/bar');
-// require('echarts/lib/chart/line');
-// require('echarts/lib/chart/pie')
-// require('echarts/')
-// // // 引入提示框和标题组件
-// require('echarts/lib/component/tooltip');
-// require('echarts/lib/component/title');
-// import echarts from "echarts";
 import React from 'react';
-const echarts = require('native-echarts');
+import Echart from 'native-echarts';
+import {View} from 'react-native';
 
 const backgroundColor = 'rgba(0, 0, 0, 0.3)';
-const maskBgColor = 'rgba(0, 0, 0, 0.1)'
-const transparent = 'rgba(0, 0, 0, 0)'
+const maskBgColor = 'rgba(0, 0, 0, 0.1)';
+const transparent = 'rgba(0, 0, 0, 0)';
 const colors = ['#722ed1', '#13c2c2', '#52c41a', '#1890ff', '#2f54eb', '#722ed1'];
 
-class ExCharts extends React.Component {
-    constructor (props) {
+class ExChart extends React.Component{
+    constructor(props){
         super(props);
         this.dispatchType = this.dispatchType.bind(this);
+        this.options = {};
     }
     dispatchType (props) {
-        const { option, data, chartOption } = props;
-        switch (option.type) {
+        const { opt, data, chartOption } = props;
+        let option = {};
+        switch (opt.type) {
             case 'normal-line':// 普通线性图
-                this.chart.setOption(drawNormalLine(data, chartOption));
+                option = drawNormalLine(data, chartOption);
                 break;
             case 'normal-bar':// 普通条形图
-                this.chart.setOption(drawNormalBar(data, chartOption));
+                option = drawNormalBar(data, chartOption);
                 break;
             case 'normal-pie':// 普通饼图
-                this.chart.setOption(drawNormalPie(data, chartOption));
+                option = drawNormalPie(data, chartOption);
                 break;
             case 'common':// 普通图
-                this.chart.setOption(chartOption);
+                option = chartOption;
                 break;
             case 'with-bg-pie':// 带纹理的饼图
-                this.chart.setOption(drawWithBgPie(data, chartOption, this.props.itemStyle));
+                option = drawWithBgPie(data, chartOption, this.props.itemStyle);
                 break;
             case 'horizontal-bar':// 横向条形图
-                this.chart.setOption(drawHorizontalBar(data, chartOption));
+                option = drawHorizontalBar(data, chartOption);
                 break;
             case 'horizontal-stack-bar':// 横向堆积条形图
-                this.chart.setOption(drawHorizontalStackBar(data, chartOption));
+                option = drawHorizontalStackBar(data, chartOption);
                 break;
             case 'horizontal-stack-card-bar':// 横向堆积条形图-面板card
-                this.chart.setOption(drawHorizontalStackCardBar(data, chartOption));
+                option = drawHorizontalStackCardBar(data, chartOption);
                 break;
             case 'customized-pie':
-                this.chart.setOption(drawCustomizedPie(data, chartOption));
+                option = drawCustomizedPie(data, chartOption);
                 break;
             case 'heat-map': //热力地图
-                this.chart.setOption(drawHeatMap(data,chartOption,option.selectedCountry));
+                option = drawHeatMap(data,chartOption,option.selectedCountry);
                 break;
             case 'radar-chart': //雷达图
-                this.chart.setOption(drawRadarChart(data, chartOption));
+                option = drawRadarChart(data, chartOption);
                 break;
             case 'time-line': //时间轴图
-                this.chart.setOption(drawTimeLineChart(data, chartOption));
+                option = drawTimeLineChart(data, chartOption);
                 break;
             case 'le-chart':
                 // this.chart.setOption(data);
-                this.chart.setOption(drawBubbleChart(data,chartOption));
+                option = drawBubbleChart(data,chartOption);
                 break;
             case 'region-map':
-                this.chart.setOption(drawRegionMap(data,chartOption,this.props.country,option.mapJsonData));
+                option = drawRegionMap(data,chartOption,this.props.country,option.mapJsonData);
                 break;
+        }
+        this.options = option;
+    }
 
-        }
-        //echarts折线图添加区域点击事件，而不用去点小圆点（扩大点击范围）
-        if (option.type === 'normal-line'){
-            this.chart.getZr().on('click',params=>{
-                const pointInPixel= [params.offsetX, params.offsetY];
-                if (this.chart.containPixel('grid',pointInPixel)) {
-                    let xIndex=this.chart.convertFromPixel({seriesIndex:0},[params.offsetX, params.offsetY])[0];
-                    let time = chartOption['xAxis.data'][xIndex];
-                    let value = data[0][xIndex];
-                    this.props.onClick(time, value);
-                }
-            });
-            this.chart.getZr().on('mousemove',params=>{
-                const pointInPixel= [params.offsetX, params.offsetY];
-                if (this.chart.containPixel('grid',pointInPixel)) {
-                    this.chart.getZr().setCursorStyle('pointer');
-                }
-            });
-            this.chart.getZr().on('mouseout',params=>{
-                const pointInPixel= [params.offsetX, params.offsetY];
-                if (!this.chart.containPixel('grid',pointInPixel)) {
-                    this.chart.getZr().setCursorStyle('default');
-                }
-            });
-        }else {
-            this.chart.on('click', this.props.onClick);
-        }
+    // componentWillMount() {
+    //     console.log('props1',this.props);
+    //     this.dispatchType(this.props)
+    // }
+
+    componentWillReceiveProps(nextProps) {
+        console.log('props2',nextProps);
+        this.dispatchType(nextProps)
     }
-    componentDidMount () {
-        const { container, theme } = this.props;
-        this.chart = echarts.init(document.getElementById(container), theme || 'dark');
-        // 认为一开始没有携带数据就加载进度条，等数据进来再关闭
-        if (!(this.props.data && (this.props.data.length > 0||this.props.data.series))) {
-            this.chart.showLoading('default', {text:'loading...',maskColor: maskBgColor,textColor: '#fff'});
-        }else{
-            this.dispatchType(this.props);
-        }
-    }
-    // 异步加载触发的更新
-    componentWillReceiveProps (nextProps) {
-        if (nextProps.data && nextProps.data.length > 0) { this.chart.hideLoading(); }
-        this.dispatchType(nextProps);
-        return false;
-    }
+
     render () {
-        const { container, minHeight, width } = this.props;
-        let clientWidth = document.body.clientWidth;
-        return (
-            <div id={container} style={{ width: width || clientWidth / 3, height: minHeight || 500 }}></div>
-        );
+        const { minHeight, width , onPress} = this.props;
+        // let clientWidth = document.body.clientWidth;
+        if(JSON.stringify(this.options)!=='{}'){
+            return (
+                <Echart option={this.options} width={width||400} height={minHeight||500} onPress={onPress}></Echart>
+            );
+        }else
+            return <View></View>;
     }
 }
 
@@ -958,5 +919,4 @@ function drawRegionMap(data,option,country,mapJsonData){
         return opt;
     }
 }
-
-export default ExCharts;
+export default ExChart;
