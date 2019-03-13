@@ -16,8 +16,8 @@ class PainPoint extends React.Component {
                     opt={{ type: 'customized-pie' }}
                     data={chartData.data}
                     chartOption={chartData.option}
-                    width={'90%'}
-                    minHeight={250}
+                    width={'100%'}
+                    minHeight={300}
                     // onClick={this.handleClick}
                 />
             </View>

@@ -288,71 +288,99 @@ actions.loadSecondChart = () => dispatch => {
     ];
     dispatch({ type: 'HOME_SECOND_DATA', data, option });
 };
-// actions.loadThirdChart = () => dispatch => {
-//     const mockData = [
-//         {
-//             "date":"201807",
-//             "number":17147.679
-//         },
-//         {
-//             "date":"201808",
-//             "number":20070.311
-//         },
-//         {
-//             "date":"201809",
-//             "number":23233.126
-//         },
-//         {
-//             "date":"201810",
-//             "number":27247.839
-//         },
-//         {
-//             "date":"201811",
-//             "number":31242.064
-//         },
-//         {
-//             "date":"201812",
-//             "number":31243.064
-//         }
-//     ]
-//     const option = {
-//         'xAxis.data': mockData.map((o)=>{return o.date}),
-//         'title.text':'半年内ROM激活量(千)',
-//         'yAxis.axisLabel.rotate': 45,
-//         // 'xAxis.axisLabel.rotate': 45,
-//         // area: {}
-//     };
-//     let data = [];
-//     for (let i = 0; i < mockData.length; i++) {
-//         data.push(mockData[i].number)
-//     }
-//     dispatch({ type: 'HOME_THIRD_DATA', data: [data], option });
-// };
+actions.loadThirdChart = () => dispatch => {
+    const mockData = [
+        {
+            "date":"201807",
+            "number":17147.679
+        },
+        {
+            "date":"201808",
+            "number":20070.311
+        },
+        {
+            "date":"201809",
+            "number":23233.126
+        },
+        {
+            "date":"201810",
+            "number":27247.839
+        },
+        {
+            "date":"201811",
+            "number":31242.064
+        },
+        {
+            "date":"201812",
+            "number":31243.064
+        }
+    ]
+    const option = {
+        'xAxis.data': mockData.map((o)=>{return o.date}),
+        'title.text':'半年内ROM激活量(千)',
+        'yAxis.axisLabel.rotate': 45,
+        // 'xAxis.axisLabel.rotate': 45,
+        // area: {}
+    };
+    let data = [];
+    for (let i = 0; i < mockData.length; i++) {
+        data.push(mockData[i].number)
+    }
+    dispatch({ type: 'HOME_THIRD_DATA', data: [data], option });
+};
 //
 // //horizontal-stack-bar
-// actions.loadFourthChart = (country) => dispatch => {
-//     let option = {
-//         'title.text':'使用习惯（日）',
-//         'title.subText':country,
-//         legendData: ['阅读', '看视频', '游戏', '购物'],
-//         'yAxis.type':'category',
-//         'yAxis.data':['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-//     };
-//     let data = [];
-//     for (let i = 0; i < 4; i++) {
-//         for (let j = 0; j < 7; j++) {
-//             if (!data[i]) { data[i] = []; }
-//             data[i].push((Math.random() * 3).toFixed(1) + 1);
-//         }
-//     }
-//     data.sort((o1, o2) => {
-//         // console.log(o1,o1.reduce((i1,i2)=>{return i1+i2}));
-//         if (o1.reduce((i1, i2) => { return i1 + i2; }) > o2.reduce((i3, i4) => { return i3 + i4; })) { return 1; } else { return -1; }
-//     });
-//
-//     dispatch({ type: 'HOME_FOURTH_DATA', data, option });
-// };
+actions.loadFourthChart = (country) => dispatch => {
+    let option = {
+        'title.text':'使用习惯（日）',
+        'title.subText':country,
+        legendData: ['阅读', '看视频', '游戏', '购物'],
+        'yAxis.type':'category',
+        'yAxis.data':['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+    };
+    let data = [];
+    for (let i = 0; i < 4; i++) {
+        for (let j = 0; j < 7; j++) {
+            if (!data[i]) { data[i] = []; }
+            data[i].push((Math.random() * 3).toFixed(1) + 1);
+        }
+    }
+    data.sort((o1, o2) => {
+        // console.log(o1,o1.reduce((i1,i2)=>{return i1+i2}));
+        if (o1.reduce((i1, i2) => { return i1 + i2; }) > o2.reduce((i3, i4) => { return i3 + i4; })) { return 1; } else { return -1; }
+    });
+
+    dispatch({ type: 'HOME_FOURTH_DATA', data, option });
+};
 actions.loadFifthChart = () => dispatch => {
+    // const list = ['Gallery','Dialer', 'Contacts',
+    //     'Email', 'Messaging', 'Camera',  'Smart TV', 'Launcher', 'Simple Launcher',
+    //     'SystemUI', 'LockScreen', 'Wallpaper', 'Smart Manager', 'Dual APP', 'Split screen', 'one-handed mode',
+    //     'Face Unlock', 'VUI(AI语音交互)', 'Screen Recorder', 'Screen shot', 'Compass', 'Support Center',
+    //     'User Support ', 'One Account'];
+    // const option = {
+    //     'title.text':'ROM APP每日使用时长排行(分钟)',
+    //     // subTitle: moment(new Date()).format('YYYY-MM-DD'),
+    //     // legendData: [moment(new Date())],
+    //     yAxis: {},
+    //     'xAxis.axisLabel.rotate': -45
+    // };
+    // let data = [];
+    // let x = [];
+    // for (let i = 0; i < 17; i++) {
+    //     data.push((Math.random() * 11).toFixed(1));
+    //     x.push(list[i]);
+    // }
+    // option['xAxis.data'] = x;
+    //
+    // data.sort((o1, o2) => {
+    //     if (o1 - o2>0) { return -1; } else { return 1; }
+    // });
+    // list.sort(() => { return Math.random() > 0.5 ? -1 : 1; });
+    // dispatch({ type: 'HOME_FIFTH_DATA', data, option });
+    // return ajax.get('/report/hotevent',{},'http://63.33.199.83:8066').then((data)=>{
+    //     console.log('data',data)
+    // })
     return ajax.get('/getProducts',{}).then(list=>{
         const option = {
             'title.text':'ROM APP每日使用时长排行(分钟)',

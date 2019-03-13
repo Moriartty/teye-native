@@ -8,6 +8,14 @@ const defaultState = {
         data: {},
         option: {}
     },
+    thirdChartData: {
+        data: [],
+        option: {}
+    },
+    fourthChartData: {
+        data: {},
+        option: {}
+    },
     fifthChartData:{
         option:{},
         data:[]
@@ -25,6 +33,18 @@ export default (state,action) => {
             break;
         case 'HOME_SECOND_DATA':
             newState.secondChartData = {
+                data: action.data,
+                option: action.option
+            };
+            break;
+        case 'HOME_THIRD_DATA':
+            newState.thirdChartData = {
+                data: action.data,
+                option: action.option
+            };
+            break;
+        case 'HOME_FOURTH_DATA':
+            newState.fourthChartData = {
                 data: action.data,
                 option: action.option
             };

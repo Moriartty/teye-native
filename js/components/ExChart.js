@@ -2,7 +2,8 @@ import React from 'react';
 import Echart from 'native-echarts';
 import {View} from 'react-native';
 
-const backgroundColor = 'rgba(0, 0, 0, 0.3)';
+// const backgroundColor = 'rgba(0, 0, 0, 0.3)';
+const backgroundColor = 'rgba(0, 0, 0, 0.0)';
 const maskBgColor = 'rgba(0, 0, 0, 0.1)';
 const transparent = 'rgba(0, 0, 0, 0)';
 const colors = ['#722ed1', '#13c2c2', '#52c41a', '#1890ff', '#2f54eb', '#722ed1'];
@@ -70,7 +71,7 @@ class ExChart extends React.Component{
     // }
 
     componentWillReceiveProps(nextProps) {
-        console.log('props2',nextProps);
+        // console.log('props2',nextProps);
         this.dispatchType(nextProps)
     }
 
@@ -142,7 +143,7 @@ function drawCustomizedPie (data, option) {
             left: 'center',
             top: 15,
             textStyle: {
-                color: '#ccc'
+                color: '#000'
             }
         },
         // grid: {
@@ -176,14 +177,14 @@ function drawCustomizedPie (data, option) {
                 label: {
                     normal: {
                         textStyle: {
-                            color: 'rgba(255, 255, 255, 1)'
+                            color: 'rgba(0, 0, 0, 1)'
                         }
                     }
                 },
                 labelLine: {
                     normal: {
                         lineStyle: {
-                            color: 'rgba(255, 255, 255, 0.7)'
+                            color: 'rgba(0, 0, 0, 1)'
                         },
                         smooth: 0.2,
                         length: 5,
@@ -193,8 +194,8 @@ function drawCustomizedPie (data, option) {
                 itemStyle: {
                     normal: {
                         color: '#c41d7f',
-                        shadowBlur: 200,
-                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        // shadowBlur: 200,
+                        // shadowColor: 'rgba(0, 0, 0, 0.5)'
                     }
                 },
 
@@ -306,7 +307,7 @@ function drawNormalBar (data, option) {
         grid: option.grid || {
             left: '5%',
             right: '8%',
-            bottom: '5%',
+            bottom: '10%',
             containLabel: true
         },
         backgroundColor: option.backgroundColor || backgroundColor

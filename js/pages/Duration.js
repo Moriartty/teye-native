@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View,Image } from 'react-native';
+import { Text, View,Image,InteractionManager } from 'react-native';
 import action from '../actions/home';
 import {connect} from 'react-redux';
 import ExChart from '../components/ExChart';
@@ -8,6 +8,7 @@ class Duration extends React.Component {
     componentWillMount() {
         this.props.init();
     }
+
 
     handleClick = (e) => {
         const appName = e.name;
@@ -21,8 +22,8 @@ class Duration extends React.Component {
                     opt={{ type: 'normal-bar' }}
                     chartOption={chartData.option}
                     data={chartData.data}
-                    width={'90%'}
-                    minHeight={250}
+                    width={'100%'}
+                    minHeight={300}
                     onPress={this.handleClick}
                 />
             </View>
