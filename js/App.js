@@ -113,9 +113,18 @@ class App extends Component<Props> {
                             {/*<MasterPage/>*/}
                             <AppContainer onNavigationStateChange={
                                 (preState,newState,action)=>{
-                                    console.log(newState)
                                     if(newState.routes.length==1&&newState.routes[0].routeName=='Home')
                                         switchPage('');
+                                    else{
+                                        console.log('newState',newState.routes);
+                                        const length = newState.routes.length;
+                                        menu.forEach((o,i)=>{
+                                            o.list.forEach(item=>{
+                                                if(item.name===newState.routes[length-1].params.activePage)
+                                                    switchPage(item.id);
+                                            })
+                                        })
+                                    }
                                 }}/>
                         </View>
                     </Drawer>
@@ -134,7 +143,7 @@ App = connect(state=>{
         dispatch({type:'APP_TOGGLE_SIDEBAR',openSidebar:openState})
     },
     switchPage(module){
-        dispatch({type:'APP_TOGGLE_SIDEBAR',openSidebar:false})
+        dispatch({type:'APP_TOGGLE_SIDEBAR',openSidebar:false});
         dispatch({type:'APP_SWITCH_PAGE',activePage:module})
         // console.log('args',module)
     }

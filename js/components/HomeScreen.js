@@ -73,8 +73,7 @@ class HomeScreen extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if(nextProps.activePage&&this.props.activePage!==nextProps.activePage){
-            console.log('')
+        if(this.props.activePage==''&&nextProps.activePage&&this.props.activePage!==nextProps.activePage){
             const {navigation,menu,activePage} = nextProps;
             const targetName = findTargetMenu(menu,activePage).name;
             navigation.navigate('MasterPage',{activePage:targetName});

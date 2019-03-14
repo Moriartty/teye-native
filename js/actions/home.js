@@ -353,56 +353,56 @@ actions.loadFourthChart = (country) => dispatch => {
     dispatch({ type: 'HOME_FOURTH_DATA', data, option });
 };
 actions.loadFifthChart = () => dispatch => {
-    // const list = ['Gallery','Dialer', 'Contacts',
-    //     'Email', 'Messaging', 'Camera',  'Smart TV', 'Launcher', 'Simple Launcher',
-    //     'SystemUI', 'LockScreen', 'Wallpaper', 'Smart Manager', 'Dual APP', 'Split screen', 'one-handed mode',
-    //     'Face Unlock', 'VUI(AI语音交互)', 'Screen Recorder', 'Screen shot', 'Compass', 'Support Center',
-    //     'User Support ', 'One Account'];
-    // const option = {
-    //     'title.text':'ROM APP每日使用时长排行(分钟)',
-    //     // subTitle: moment(new Date()).format('YYYY-MM-DD'),
-    //     // legendData: [moment(new Date())],
-    //     yAxis: {},
-    //     'xAxis.axisLabel.rotate': -45
-    // };
-    // let data = [];
-    // let x = [];
-    // for (let i = 0; i < 17; i++) {
-    //     data.push((Math.random() * 11).toFixed(1));
-    //     x.push(list[i]);
-    // }
-    // option['xAxis.data'] = x;
-    //
-    // data.sort((o1, o2) => {
-    //     if (o1 - o2>0) { return -1; } else { return 1; }
-    // });
-    // list.sort(() => { return Math.random() > 0.5 ? -1 : 1; });
-    // dispatch({ type: 'HOME_FIFTH_DATA', data, option });
+    const list = ['Gallery','Dialer', 'Contacts',
+        'Email', 'Messaging', 'Camera',  'Smart TV', 'Launcher', 'Simple Launcher',
+        'SystemUI', 'LockScreen', 'Wallpaper', 'Smart Manager', 'Dual APP', 'Split screen', 'one-handed mode',
+        'Face Unlock', 'VUI(AI语音交互)', 'Screen Recorder', 'Screen shot', 'Compass', 'Support Center',
+        'User Support ', 'One Account'];
+    const option = {
+        'title.text':'ROM APP每日使用时长排行(分钟)',
+        // subTitle: moment(new Date()).format('YYYY-MM-DD'),
+        // legendData: [moment(new Date())],
+        yAxis: {},
+        'xAxis.axisLabel.rotate': -45
+    };
+    let data = [];
+    let x = [];
+    for (let i = 0; i < 17; i++) {
+        data.push((Math.random() * 11).toFixed(1));
+        x.push(list[i]);
+    }
+    option['xAxis.data'] = x;
+
+    data.sort((o1, o2) => {
+        if (o1 - o2>0) { return -1; } else { return 1; }
+    });
+    list.sort(() => { return Math.random() > 0.5 ? -1 : 1; });
+    dispatch({ type: 'HOME_FIFTH_DATA', data, option });
     // return ajax.get('/report/hotevent',{},'http://63.33.199.83:8066').then((data)=>{
     //     console.log('data',data)
     // })
-    return ajax.get('/getProducts',{}).then(list=>{
-        const option = {
-            'title.text':'ROM APP每日使用时长排行(分钟)',
-            // subTitle: moment(new Date()).format('YYYY-MM-DD'),
-            // legendData: [moment(new Date())],
-            yAxis: {},
-            'xAxis.axisLabel.rotate': -45
-        };
-        let data = [];
-        let x = [];
-        for (let i = 0; i < 17; i++) {
-            data.push((Math.random() * 11).toFixed(1));
-            x.push(list[i]);
-        }
-        option['xAxis.data'] = x;
-
-        data.sort((o1, o2) => {
-            if (o1 - o2>0) { return -1; } else { return 1; }
-        });
-        list.sort(() => { return Math.random() > 0.5 ? -1 : 1; });
-        dispatch({ type: 'HOME_FIFTH_DATA', data, option });
-    })
+    // return ajax.get('/getProducts',{}).then(list=>{
+    //     const option = {
+    //         'title.text':'ROM APP每日使用时长排行(分钟)',
+    //         // subTitle: moment(new Date()).format('YYYY-MM-DD'),
+    //         // legendData: [moment(new Date())],
+    //         yAxis: {},
+    //         'xAxis.axisLabel.rotate': -45
+    //     };
+    //     let data = [];
+    //     let x = [];
+    //     for (let i = 0; i < 17; i++) {
+    //         data.push((Math.random() * 11).toFixed(1));
+    //         x.push(list[i]);
+    //     }
+    //     option['xAxis.data'] = x;
+    //
+    //     data.sort((o1, o2) => {
+    //         if (o1 - o2>0) { return -1; } else { return 1; }
+    //     });
+    //     list.sort(() => { return Math.random() > 0.5 ? -1 : 1; });
+    //     dispatch({ type: 'HOME_FIFTH_DATA', data, option });
+    // })
 };
 
 

@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {patchPostMessageJsCode,findTargetMenu} from "../utils";
 import Dashboard from '../pages/Dashboard';
 import StreamView from '../pages/StreamView';
+import Conversions from '../pages/Conversions';
 
 
 class MasterPage extends React.Component{
@@ -15,9 +16,14 @@ class MasterPage extends React.Component{
     constructor(props){
         super(props);
         this.moduleMap = {
-            _dashboard:<Dashboard switchPage={props.switchPage}/>,
-            _streamView:<StreamView/>
+            _dashboard:<Dashboard switchPage={this.reHref}/>,
+            _streamView:<StreamView/>,
+            _conversions:<Conversions/>
         }
+    }
+    reHref = (e) => {
+        const {menu,switchPage,navigation} = this.props;
+        switchPage(e.nativeEvent.data,navigation.push,findTargetMenu(menu,e.nativeEvent.data).name);
     }
     shouldComponentUpdate(nextProps){
         if(nextProps.activePage=='')
@@ -50,9 +56,9 @@ MasterPage = connect(state=>{
     const {activePage,menu} = state['app'];
     return {activePage,menu};
 },dispatch=>({
-    switchPage(e){
-        const module = e.nativeEvent.data;
-        dispatch({type:'APP_SWITCH_PAGE',activePage:38})
+    switchPage(id,f,module){
+        dispatch({type:'APP_SWITCH_PAGE',activePage:id});
+        f('MasterPage',{activePage:module})
     }
 }))(MasterPage);
 
