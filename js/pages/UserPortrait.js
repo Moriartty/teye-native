@@ -17,15 +17,15 @@ class UserPortrait extends React.Component {
         const {firstChartData:chartData} = this.props;
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                {/*<ExChart*/}
-                    {/*opt={{ type: 'time-line' }}*/}
-                    {/*chartOption={chartData.option}*/}
-                    {/*data={['a']}*/}
-                    {/*width={'90%'}*/}
-                    {/*minHeight={250}*/}
-                    {/*// onPress={this.handleClick}*/}
-                {/*/>*/}
-                <Echart option={chartData.option} width={'100%'} height={300}></Echart>
+                <ExChart
+                    opt={{ type: 'time-line' }}
+                    chartOption={chartData.option}
+                    data={['a']}
+                    width={'90%'}
+                    minHeight={250}
+                    // onPress={this.handleClick}
+                />
+                {/*<Echart option={chartData.option} width={'100%'} height={300}></Echart>*/}
             </View>
         );
     }

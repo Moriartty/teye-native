@@ -11,14 +11,18 @@ import PainPoint from '../pages/PainPoint';
 import Activation from '../pages/Activation';
 import Habit from '../pages/Habit';
 import Duration from '../pages/Duration';
+import Home from '../pages/Home';
+import Others from '../pages/Others';
 
 
 const TabNavigator = createBottomTabNavigator({
-    Portrait: UserPortrait,
-    PainPoint: PainPoint,
-    Activation: Activation,
-    Habit: Habit,
-    Duration: Duration,
+    Home:Home,
+    Others:Others
+    // Portrait: UserPortrait,
+    // PainPoint: PainPoint,
+    // Activation: Activation,
+    // Habit: Habit,
+    // Duration: Duration,
 },{
     defaultNavigationOptions: ({ navigation }) => ({
         tabBarIcon: ({ focused, horizontal, tintColor }) => {
@@ -26,21 +30,27 @@ const TabNavigator = createBottomTabNavigator({
             let IconComponent = Ionicons;
             let iconName;
             switch(routeName){
-                case 'Portrait':
+                case 'Home':
                     iconName = `ios-home${focused ? '' : ''}`;
                     break;
-                case 'PainPoint':
+                case 'Others':
                     iconName = `ios-flag${focused ? '' : ''}`;
                     break;
-                case 'Activation':
-                    iconName = `ios-information-circle${focused ? '' : ''}`;
-                    break;
-                case 'Habit':
-                    iconName = `ios-heart${focused ? '' : ''}`;
-                    break;
-                case 'Duration':
-                    iconName = `ios-search${focused ? '' : ''}`;
-                    break;
+                // case 'Portrait':
+                //     iconName = `ios-home${focused ? '' : ''}`;
+                //     break;
+                // case 'PainPoint':
+                //     iconName = `ios-flag${focused ? '' : ''}`;
+                //     break;
+                // case 'Activation':
+                //     iconName = `ios-information-circle${focused ? '' : ''}`;
+                //     break;
+                // case 'Habit':
+                //     iconName = `ios-heart${focused ? '' : ''}`;
+                //     break;
+                // case 'Duration':
+                //     iconName = `ios-search${focused ? '' : ''}`;
+                //     break;
             }
             return <IconComponent name={iconName} size={25} color={tintColor} />;
         },

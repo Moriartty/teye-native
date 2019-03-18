@@ -2405,11 +2405,11 @@
       }
     },
     "echarts": {
-      "version": "3.2.3",
-      "resolved": "https://registry.npmjs.org/echarts/-/echarts-3.2.3.tgz",
-      "integrity": "sha1-TwHhW/2jNS/NjvkEnxPYRIlxolg=",
+      "version": "4.1.0",
+      "resolved": "https://registry.npmjs.org/echarts/-/echarts-4.1.0.tgz",
+      "integrity": "sha512-gP1e1fNnAj9KJpTDLXV21brklbfJlqeINmpQDJCDta9TX3cPoqyQOiDVcEPzbOVHqgBRgTOwNxC5iGwJ89014A==",
       "requires": {
-        "zrender": "3.7.4"
+        "zrender": "4.0.4"
       }
     },
     "ee-first": {
@@ -7813,6 +7813,11 @@
         "commander": "2.19.0"
       }
     },
+    "moment": {
+      "version": "2.24.0",
+      "resolved": "https://registry.npmjs.org/moment/-/moment-2.24.0.tgz",
+      "integrity": "sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg=="
+    },
     "morgan": {
       "version": "1.9.1",
       "resolved": "https://registry.npmjs.org/morgan/-/morgan-1.9.1.tgz",
@@ -7899,6 +7904,21 @@
       "integrity": "sha512-3agM6Mh6Xg95M0OrOdKWsuVl5MrGPz1ZS8hT1Ophhjr/byHZLKtL7RCqj4ul5f+t5ZXRuUOikM0obsyIANM7zw==",
       "requires": {
         "echarts": "3.2.3"
+      },
+      "dependencies": {
+        "echarts": {
+          "version": "3.2.3",
+          "resolved": "https://registry.npmjs.org/echarts/-/echarts-3.2.3.tgz",
+          "integrity": "sha1-TwHhW/2jNS/NjvkEnxPYRIlxolg=",
+          "requires": {
+            "zrender": "3.7.4"
+          }
+        },
+        "zrender": {
+          "version": "3.7.4",
+          "resolved": "https://registry.npmjs.org/zrender/-/zrender-3.7.4.tgz",
+          "integrity": "sha512-5Nz7+L1wIoL0+Pp/iOP56jD6eD017qC9VRSgUBheXBiAHgOBJZ4uh4/g6e83acIwa8RKSyZf/FlceKu5ntUuxQ=="
+        }
       }
     },
     "natural-compare": {
@@ -10797,9 +10817,9 @@
       }
     },
     "zrender": {
-      "version": "3.7.4",
-      "resolved": "https://registry.npmjs.org/zrender/-/zrender-3.7.4.tgz",
-      "integrity": "sha512-5Nz7+L1wIoL0+Pp/iOP56jD6eD017qC9VRSgUBheXBiAHgOBJZ4uh4/g6e83acIwa8RKSyZf/FlceKu5ntUuxQ=="
+      "version": "4.0.4",
+      "resolved": "https://registry.npmjs.org/zrender/-/zrender-4.0.4.tgz",
+      "integrity": "sha512-03Vd/BDl/cPXp8E61f5+Xbgr/a4vDyFA+uUtUc1s+5KgcPbyY2m+78R/9LQwkR6QwFYHG8qk25Q8ESGs/qpkZw=="
     }
   }
 }

@@ -1,5 +1,6 @@
 import React from 'react';
-import Echart from 'native-echarts';
+// import Echart from 'native-echarts';
+import Echart from './Native-Echart'
 import {View} from 'react-native';
 
 // const backgroundColor = 'rgba(0, 0, 0, 0.3)';
@@ -621,6 +622,9 @@ function drawHeatMap (data, option,selectedCountry) {
             textStyle: {
                 color: '#fff'
             },
+            itemWidth:10,
+            itemHeight:100,
+            bottom:'15%',
             calculable: true,
             show:true
         },
@@ -807,13 +811,13 @@ function drawBubbleChart (data, option) {
                     shadowBlur: 10,
                     shadowColor: 'rgba(25, 100, 150, 0.5)',
                     shadowOffsetY: 5,
-                    color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
-                        offset: 0,
-                        color: 'rgb(129, 227, 238)'
-                    }, {
-                        offset: 1,
-                        color: 'rgb(25, 183, 207)'
-                    }]),
+                    // color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
+                    //     offset: 0,
+                    //     color: 'rgb(129, 227, 238)'
+                    // }, {
+                    //     offset: 1,
+                    //     color: 'rgb(25, 183, 207)'
+                    // }]),
                     borderColor:'#faad14'
                 }
             }

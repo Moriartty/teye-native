@@ -1,74 +1,78 @@
 import ajax from '../utils/ajax';
-// import moment from 'moment';
+import moment from 'moment';
 let actions = {};
+const logo = require('../../img/logo.png')
 
-// actions.toggleMap = (key) => dispatch => {
-//     dispatch({ type: 'HOME_TOGGLE_MAP', mapType: key });
-// };
-//
-// const productList = ['A1X','A3','A5','Pepito VDF', 'Curie', 'A3A 8 4G', 'Pepito VZM', 'U50A PLUS TMO',
-//     'A3A TMO', 'U3A 7 3G', 'N4', 'A70A XL MPCS'];
-// actions.loadBubble = (product) => dispatch => {
-//     const temp = ['Pepito VDF', 'Curie', 'A3A 8 4G', 'A70A XL TMO', 'PEPITO VZW', 'U50A PLUS TMO',
-//         'A30A TMO', 'U3A 7 3G', 'N4', 'A70A XL MPCS', 'U3A 10 KD', 'U3A PLUS VDF', 'A5X', 'A3A 8 4G TMO',
-//         'U50A PLUS ATT', 'Tiger C', 'U50A PLUS TF', 'U50A ATT', 'GFLIP2 TF', 'A3A PLUS', 'B-LUNA', 'U3A 7 3G VDF',
-//         'A3A XL 4G', 'U3A 10 WIFI', 'U3A 7 WIFI', 'Mickey6T GC', 'A3A VF', 'U5A PLUS VF', 'Tiger V', 'U3A Plus 4G',
-//         'A3A', 'Pixi4-4 C', 'A5A INFINI', 'Handy-T2', 'B-ATHENA', 'B-ATHENA CN', 'Tiger A', 'U5A PLUS 3G', 'U5A PLUS 4G'
-//     ];
-//     const ratio = document.body.clientWidth>=1280?2:1.6;
-//     const mainPageW = 3*document.body.clientWidth/4;
-//     const mainPageH = 2*document.body.clientHeight/3-40;
-//     let data = [];
-//     let curX = 0,curY = 50*ratio;
-//     productList.forEach(function (o, i) {
-//         var temp = [];
-//         // let size = (Math.random() * 30 + 20)*ratio;
-//         const size = 40*ratio;
-//         // let x = curX;
-//         // let y = Math.sqrt(curX);
-//         // curX += 100;
-//         let x = curX;
-//         let y = parseInt(Math.random()*5000+2000);
-//         curX += 20;
-//         // console.log(moment().add(-x,'day').format('YYYY-MM-DD'));
-//         if(o.indexOf(product)>-1){
-//             if(productList.indexOf(o)>-1)
-//                 temp.push([moment().add(-x,'day').format('YYYY-MM-DD'), y, size, o,true,require('img/'+o+'.png')]);
-//             else
-//                 temp.push([moment().add(-x,'day').format('YYYY-MM-DD'), y, size, o,true]);
-//         }
-//         else{
-//             if(productList.indexOf(o)>-1)
-//                 temp.push([moment().add(-x,'day').format('YYYY-MM-DD'), y, size, o,false,require('img/'+o+'.png')]);
-//             else
-//                 temp.push([moment().add(-x,'day').format('YYYY-MM-DD'), y, size, o,false]);
-//         }
-//         data.push(temp);
-//         //temp[4]标识是否被查询选中，temp[5]标识图片资源
-//     });
-//     dispatch({ type: 'HOME_BUBBLE_DATA', data: data });
-// };
-//
-// actions.refreshBubble = (product,chartData) => dispatch => {
-//     chartData.data.forEach((o,i)=>{
-//         if(product&&o[0][3].indexOf(product)>-1)
-//             o[0][4] = true;
-//         else
-//             o[0][4] = false;
-//     })
-//     dispatch({ type: 'HOME_REFRESHBUBBLE_DATA', chartData });
-// };
-//
-// actions.loadMap = () => dispatch => {
-//     ajax.get('/report/device-report/getDeviceActiveOfDay',{}).then(data=>{
-//         console.log(data);
-//     })
-//     let option = {
-//         useGeo:true
-//     }
-//     dispatch({type:'HOME_MAP_DATA',option});
-// }
-//
+actions.toggleMap = (key) => dispatch => {
+    dispatch({ type: 'HOME_TOGGLE_MAP', mapType: key });
+};
+
+const productList = ['A1X','A3','A5','Pepito VDF', 'Curie', 'A3A 8 4G', 'Pepito VZM', 'U50A PLUS TMO',
+    'A3A TMO', 'U3A 7 3G', 'N4', 'A70A XL MPCS'];
+actions.loadBubble = (product) => dispatch => {
+    const temp = ['Pepito VDF', 'Curie', 'A3A 8 4G', 'A70A XL TMO', 'PEPITO VZW', 'U50A PLUS TMO',
+        'A30A TMO', 'U3A 7 3G', 'N4', 'A70A XL MPCS', 'U3A 10 KD', 'U3A PLUS VDF', 'A5X', 'A3A 8 4G TMO',
+        'U50A PLUS ATT', 'Tiger C', 'U50A PLUS TF', 'U50A ATT', 'GFLIP2 TF', 'A3A PLUS', 'B-LUNA', 'U3A 7 3G VDF',
+        'A3A XL 4G', 'U3A 10 WIFI', 'U3A 7 WIFI', 'Mickey6T GC', 'A3A VF', 'U5A PLUS VF', 'Tiger V', 'U3A Plus 4G',
+        'A3A', 'Pixi4-4 C', 'A5A INFINI', 'Handy-T2', 'B-ATHENA', 'B-ATHENA CN', 'Tiger A', 'U5A PLUS 3G', 'U5A PLUS 4G'
+    ];
+    // const ratio = document.body.clientWidth>=1280?2:1.6;
+    const ratio = 1.2;
+    // const mainPageW = 3*document.body.clientWidth/4;
+    // const mainPageH = 2*document.body.clientHeight/3-40;
+    let data = [];
+    let curX = 0,curY = 50*ratio;
+    productList.forEach(function (o, i) {
+        var temp = [];
+        // let size = (Math.random() * 30 + 20)*ratio;
+        const size = 40*ratio;
+        // let x = curX;
+        // let y = Math.sqrt(curX);
+        // curX += 100;
+        let x = curX;
+        let y = parseInt(Math.random()*5000+2000);
+        curX += 20;
+        // console.log(moment().add(-x,'day').format('YYYY-MM-DD'));
+        if(o.indexOf(product)>-1){
+            if(productList.indexOf(o)>-1)
+                // temp.push([moment().add(-x,'day').format('YYYY-MM-DD'), y, size, o,true,require('../../img/logo.png')]);
+                temp.push([moment().add(-x,'day').format('YYYY-MM-DD'), y, size, o,true]);
+            else
+                temp.push([moment().add(-x,'day').format('YYYY-MM-DD'), y, size, o,true]);
+        }
+        else{
+            if(productList.indexOf(o)>-1)
+                // temp.push([moment().add(-x,'day').format('YYYY-MM-DD'), y, size, o,false,require('../../img/logo.png')]);
+                temp.push([moment().add(-x,'day').format('YYYY-MM-DD'), y, size, o,false]);
+            else
+                temp.push([moment().add(-x,'day').format('YYYY-MM-DD'), y, size, o,false]);
+        }
+        data.push(temp);
+        //temp[4]标识是否被查询选中，temp[5]标识图片资源
+    });
+    dispatch({ type: 'HOME_BUBBLE_DATA', data: data });
+};
+
+actions.refreshBubble = (product,chartData) => dispatch => {
+    chartData.data.forEach((o,i)=>{
+        if(product&&o[0][3].indexOf(product)>-1)
+            o[0][4] = true;
+        else
+            o[0][4] = false;
+    })
+    dispatch({ type: 'HOME_REFRESHBUBBLE_DATA', chartData });
+};
+
+actions.loadMap = () => dispatch => {
+    ajax.get('/report/device-report/getDeviceActiveOfDay',{},'http://63.33.199.83:8066').then(data=>{
+        console.log(data);
+    })
+    let option = {
+        useGeo:true,
+    }
+    dispatch({type:'HOME_MAP_DATA',option});
+}
+
 actions.loadFirstChart = (country) => dispatch => {
     var dataMap = {};
     function dataFormatter (obj) {

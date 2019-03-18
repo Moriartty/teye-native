@@ -1,6 +1,17 @@
 import {objectAppend} from "../utils";
 
 const defaultState = {
+    mapType: 'map',
+    mapChartData:{
+        data:[],
+        option:{}
+    },
+    selectedProduct:'',
+    selectedCountry:'world',
+    bubbleChartData: {
+        data: [],
+        option: {},
+    },
     firstChartData: {
         option:{}
     },
@@ -25,6 +36,24 @@ const defaultState = {
 export default (state,action) => {
     let newState = {};
     switch(action.type){
+        case 'HOME_MAP_DATA':
+            newState.mapChartData = {
+                data: action.data,
+                option: action.option
+            };
+            break;
+        case 'HOME_BUBBLE_DATA':
+            newState.bubbleChartData = {
+                data: action.data,
+                option: action.option,
+            };
+            break;
+        case 'HOME_REFRESHBUBBLE_DATA':
+            newState.bubbleChartData = {
+                data: action.chartData.data,
+                option: action.chartData.option,
+            };
+            break;
         case 'HOME_FIRST_DATA':
             newState.firstChartData = {
                 // data:action.data,
