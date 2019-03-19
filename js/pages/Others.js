@@ -6,7 +6,7 @@ import action from '../actions/home';
 import UserPortrait from './UserPortrait';
 import PainPoint from './PainPoint';
 import Activation from './Activation';
-import Habit from '../pages/Habit';
+import Habit from './Habit';
 import Duration from './Duration';
 import theme from '../config/theme';
 import {Carousel} from '@ant-design/react-native';
@@ -18,15 +18,17 @@ class Others extends React.Component{
     render(){
         return (
             <View style={styles.othersContainer}>
+
                 <Carousel
                     style={styles.wrapper}
                     selectedIndex={0}
+                    // autoplay
                 >
-                    {/*<UserPortrait/>*/}
-                    {/*<PainPoint/>*/}
-                    {/*<Activation/>*/}
-                    {/*<Habit/>*/}
-                    <Duration/>
+                    <View style={styles.subWrapper}><UserPortrait/></View>
+                    <View style={styles.subWrapper}><PainPoint/></View>
+                    <View style={styles.subWrapper}><Activation/></View>
+                    <View style={styles.subWrapper}><Habit/></View>
+                    <View style={styles.subWrapper}><Duration/></View>
                 </Carousel>
             </View>
         )
@@ -38,11 +40,11 @@ Others = connect(state=>{
     return {mapType};
 },dispatch=>({
     init(){
-        // dispatch(action.loadFirstChart());
-        // dispatch(action.loadSecondChart());
-        // dispatch(action.loadThirdChart());
-        // dispatch(action.loadFourthChart());
-        // dispatch(action.loadFifthChart());
+        dispatch(action.loadFirstChart());
+        dispatch(action.loadSecondChart());
+        dispatch(action.loadThirdChart());
+        dispatch(action.loadFourthChart());
+        dispatch(action.loadFifthChart());
     }
 }))(Others);
 
@@ -51,11 +53,17 @@ const styles = StyleSheet.create({
         // backgroundColor:theme["primary-color"],
         width:'100%',
         height:'100%',
-        // flex:1,
-        // justifyContent:'center'
+        flex:1,
+        justifyContent:'center'
     },
     wrapper: {
-        // backgroundColor: '#fff',
+
+    },
+    subWrapper:{
+        width:'100%',
+        height:'100%',
+        // flex:1,
+        // justifyContent:'center'
     },
     containerHorizontal: {
         flexGrow: 1,

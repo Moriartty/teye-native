@@ -4,9 +4,9 @@ import ExChart from '../components/ExChart';
 import {connect} from 'react-redux';
 import action from '../actions/home';
 
-class Activation extends React.Component {
+class Activation extends React.PureComponent {
     componentWillMount() {
-        this.props.init();
+        // this.props.init();
     }
     render() {
         const {thirdChartData:chartData} = this.props;
@@ -17,7 +17,7 @@ class Activation extends React.Component {
                     chartOption={chartData.option}
                     data={chartData.data}
                     width={'100%'}
-                    minHeight={300}
+                    minHeight={350}
                     // onClick={this.handleClick}
                 />
             </View>

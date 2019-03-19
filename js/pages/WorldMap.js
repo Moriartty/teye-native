@@ -9,7 +9,6 @@ let geoCoordMap = {
     '美国': [-77.01, 38.91],
     '法国': [2.20, 42.52]
 };
-
 let convertData = function (data) {
     var res = [];
     for (var i = 0; i < data.length; i++) {
@@ -21,7 +20,7 @@ let convertData = function (data) {
     return res;
 };
 
-class WorldMap extends React.Component {
+class WorldMap extends React.PureComponent {
     constructor (props) {
         super(props);
         // this.state = { selectCountry: '' };
@@ -39,16 +38,14 @@ class WorldMap extends React.Component {
     }
     render () {
         const { width, height, id,selectedCountry, mapChartData:chartData } = this.props;
+        console.log('bbb');
         return (
             <ExChart
                 opt={{ type: 'heat-map' ,selectedCountry:selectedCountry}}
-                data={convertData(
-                    [{ name: '中国', value: 300 },
-                    { name: '美国', value: 800 },
-                    { name: '法国', value: 500 }])}
+                data={convertData(chartData.data)}
                 chartOption={chartData.option}
                 width={'100%'}
-                minHeight={450}
+                minHeight={300}
                 onPress={this.handleClick}
             />
         );

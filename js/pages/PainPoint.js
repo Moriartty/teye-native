@@ -4,9 +4,9 @@ import ExChart from '../components/ExChart';
 import {connect} from 'react-redux';
 import action from '../actions/home'
 
-class PainPoint extends React.Component {
+class PainPoint extends React.PureComponent {
     componentWillMount() {
-        this.props.init();
+        // this.props.init();
     }
     render() {
         const {secondChartData:chartData} = this.props;
@@ -17,7 +17,7 @@ class PainPoint extends React.Component {
                     data={chartData.data}
                     chartOption={chartData.option}
                     width={'100%'}
-                    minHeight={300}
+                    minHeight={380}
                     // onClick={this.handleClick}
                 />
             </View>

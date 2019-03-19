@@ -7,12 +7,14 @@ import WorldMap from './WorldMap';
 import BubbleChart from './BubbleChart';
 import theme from '../config/theme';
 import {Carousel} from '@ant-design/react-native';
+import LoadingScreen from '../components/LoadingScreen';
 
 class Home extends React.Component{
     componentWillMount() {
-        this.props.init();
+        // this.props.init();
     }
     render(){
+        const {mapChartData} = this.props;
         return (
             <View style={styles.homeContainer}>
                 <Carousel
@@ -21,8 +23,19 @@ class Home extends React.Component{
                     // infinite
                     // afterChange={this.onHorizontalSelectedIndexChange}
                 >
-                    <WorldMap/>
-                    <BubbleChart/>
+                    <View style={styles.subWrapper}>
+                        <WorldMap/>
+                    </View>
+                    {/*<LoadingScreen*/}
+                        {/*style={styles.subWrapper}*/}
+                        {/*data={mapChartData.data}*/}
+                        {/*loadingStyle={{size:'large',color:'white'}}*/}
+                    {/*>*/}
+                        {/*<WorldMap/>*/}
+                    {/*</LoadingScreen>*/}
+                    <View style={styles.subWrapper}>
+                        <BubbleChart/>
+                    </View>
                 </Carousel>
             </View>
         )
@@ -30,8 +43,8 @@ class Home extends React.Component{
 }
 
 Home = connect(state=>{
-    const {mapType} = state['home'];
-    return {mapType};
+    const {mapType,mapChartData} = state['home'];
+    return {mapType,mapChartData};
 },dispatch=>({
     init(){
         dispatch(action.loadMap());
@@ -48,7 +61,14 @@ const styles = StyleSheet.create({
         justifyContent:'center'
     },
     wrapper: {
-        // backgroundColor: '#fff',
+        // width:'100%',
+        // height:400
+    },
+    subWrapper:{
+        width:'100%',
+        height:'100%',
+        // flex:1,
+        justifyContent:'center'
     },
     containerHorizontal: {
         flexGrow: 1,

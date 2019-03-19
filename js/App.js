@@ -52,7 +52,7 @@ class App extends Component<Props> {
                     <View style={styles.sidebarHeader}>
                         <Flex justify={'between'}>
                             <Flex.Item>
-                                <Image style={{width:50,height:50}}
+                                <Image style={{width:60,height:60,borderRadius:30,borderWidth:2,borderColor:'white'}}
                                        source={{uri:'https://avatars0.githubusercontent.com/u/15435074?s=460&v=4'}}/>
                             </Flex.Item>
                             <Flex.Item>
@@ -104,7 +104,7 @@ class App extends Component<Props> {
                         position="left"
                         open={openState}
                         drawerRef={el => (this.drawer = el)}
-                        drawerWidth={300}
+                        drawerWidth={260}
                         onOpenChange={toggleSidebar}
                         drawerBackgroundColor="#ccc"
                     >
@@ -160,7 +160,6 @@ const styles = StyleSheet.create({
     },
     sidebarHeader:{
         width:'100%',
-        // width:200,
         height:130,
         padding:20,
         backgroundColor:'#1890ff'

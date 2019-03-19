@@ -12,7 +12,7 @@ class BubbleChart extends React.PureComponent {
                 data={chartData.data}
                 // chartOption={option}
                 width={'100%'}
-                minHeight={450}
+                minHeight={350}
                 onClick={this.props.onClick}
             />
         );

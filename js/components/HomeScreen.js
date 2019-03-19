@@ -6,23 +6,14 @@ import {findTargetMenu} from "../utils/index";
 const theme = require('../config/theme');
 import {createAppContainer, createBottomTabNavigator} from "react-navigation";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import UserPortrait from '../pages/UserPortrait';
-import PainPoint from '../pages/PainPoint';
-import Activation from '../pages/Activation';
-import Habit from '../pages/Habit';
-import Duration from '../pages/Duration';
 import Home from '../pages/Home';
 import Others from '../pages/Others';
+import action from "../actions/home";
 
 
 const TabNavigator = createBottomTabNavigator({
     Home:Home,
     Others:Others
-    // Portrait: UserPortrait,
-    // PainPoint: PainPoint,
-    // Activation: Activation,
-    // Habit: Habit,
-    // Duration: Duration,
 },{
     defaultNavigationOptions: ({ navigation }) => ({
         tabBarIcon: ({ focused, horizontal, tintColor }) => {
@@ -96,6 +87,7 @@ class HomeScreen extends React.Component {
     }
 
     componentWillMount() {
+        this.props.init();
         this.props.navigation.setParams({handleNavClick:this.handleNavClick})
     }
 
@@ -114,6 +106,15 @@ HomeScreen = connect(state=>{
 },dispatch=>({
     toggleSidebar(openState){
         dispatch({type:'APP_TOGGLE_SIDEBAR',openSidebar:openState})
+    },
+    init(){
+        setTimeout(function(){dispatch(action.loadMap())},5000);
+        dispatch(action.loadBubble());
+        dispatch(action.loadFirstChart());
+        dispatch(action.loadSecondChart());
+        dispatch(action.loadThirdChart());
+        dispatch(action.loadFourthChart());
+        dispatch(action.loadFifthChart());
     }
 }))(HomeScreen);
 

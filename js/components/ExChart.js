@@ -72,7 +72,6 @@ class ExChart extends React.Component{
     // }
 
     componentWillReceiveProps(nextProps) {
-        // console.log('props2',nextProps);
         this.dispatchType(nextProps)
     }
 
@@ -194,7 +193,7 @@ function drawCustomizedPie (data, option) {
                 },
                 itemStyle: {
                     normal: {
-                        color: '#c41d7f',
+                        color: '#002766',
                         // shadowBlur: 200,
                         // shadowColor: 'rgba(0, 0, 0, 0.5)'
                     }
@@ -216,7 +215,7 @@ function drawCustomizedPie (data, option) {
 function drawNormalLine (data, option) {
     let opt = {
         grid: option.grid || {
-            left: '2%',
+            left: '0%',
             right: '4%',
             bottom: '5%',
             containLabel: true
@@ -233,7 +232,13 @@ function drawNormalLine (data, option) {
         color: ['#40a9ff'],
         xAxis: {
             type: 'category',
-            data: option['xAxis.data']
+            data: option['xAxis.data'],
+            // axisLine:{
+            //     show:option['xAxis.axisLine.show']!=undefined?option['xAxis.axisLine.show']:true
+            // },
+            // splitLine:{
+            //     show:option['xAxis.splitLine.show']!=undefined?option['xAxis.splitLine.show']:true
+            // },
         },
         yAxis: {
             'type':option['yAxis.type']||'value',
@@ -287,7 +292,7 @@ function drawNormalBar (data, option) {
             textStyle: option['title.textStyle'] || {},
             subtext: option.subTitle
         },
-        color: option.color || ['#36cfc9'],
+        color: option.color || ['#0050b3'],
         tooltip: option.tooltip || {
             trigger: 'axis'
         },
@@ -300,7 +305,20 @@ function drawNormalBar (data, option) {
             },
             show: option['xAxis.show'] !== undefined ? option['xAxis.show']:true
         },
-        yAxis: option.yAxis||{},
+        yAxis: option.yAxis||{
+            'type':option['yAxis.type']||'value',
+            axisLabel: {
+                rotate: option['yAxis.axisLabel.rotate'] || 0,
+                interval: option['yAxis.axisLabel.interval'] || 0
+            },
+            show:option['yAxis.show']!=undefined?option['yAxis.show']:true,
+            axisLine:{
+                show:option['yAxis.axisLine.show']!=undefined?option['yAxis.axisLine.show']:true
+            },
+            splitLine:{
+                show:option['yAxis.splitLine.show']!=undefined?option['yAxis.splitLine.show']:true
+            }
+        },
         series: [{
             type: 'bar',
             data: data
@@ -308,7 +326,7 @@ function drawNormalBar (data, option) {
         grid: option.grid || {
             left: '5%',
             right: '8%',
-            bottom: '10%',
+            bottom: '15%',
             containLabel: true
         },
         backgroundColor: option.backgroundColor || backgroundColor
@@ -453,7 +471,7 @@ function drawHorizontalStackBar (data, option) {
                 type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
             }
         },
-        color: ['#faad14', '#13c2c2', '#52c41a', '#1890ff', '#2f54eb', '#722ed1'],
+        color: ['#002766', '#0050b3', '#1890ff', '#69c0ff'],
         legend: {
             data: option.legendData,
             x: 'center',
@@ -598,7 +616,7 @@ function drawHeatMap (data, option,selectedCountry) {
             // sublink: 'http://www.pm25.in',
             left: 'center',
             top: 'bottom',
-            padding: [20, 0],
+            padding: [0, 0],
             textStyle: {
                 color: '#fff'
             },
@@ -626,7 +644,7 @@ function drawHeatMap (data, option,selectedCountry) {
             itemHeight:100,
             bottom:'15%',
             calculable: true,
-            show:true
+            show:false
         },
         tooltip: {
             trigger: 'item',
@@ -750,7 +768,12 @@ function drawBubbleChart (data, option) {
                     type: 'dashed'
                 }
             },
-            type:'time'
+            type:'time',
+            axisLine:{
+                lineStyle:{
+                    color:'white'
+                }
+            }
             // show: false
         },
         yAxis: {
@@ -762,6 +785,11 @@ function drawBubbleChart (data, option) {
                 show:false
             },
             scale: true,
+            axisLine:{
+                lineStyle:{
+                    color:'white'
+                }
+            }
             // show: false
         },
         tooltip : {
@@ -772,7 +800,7 @@ function drawBubbleChart (data, option) {
             }
         },
         grid: {
-            top:'7%',
+            top:'12%',
             left: '2%',
             right: '5%',
             bottom: '6%',

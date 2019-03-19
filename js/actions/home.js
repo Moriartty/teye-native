@@ -1,7 +1,6 @@
 import ajax from '../utils/ajax';
 import moment from 'moment';
 let actions = {};
-const logo = require('../../img/logo.png')
 
 actions.toggleMap = (key) => dispatch => {
     dispatch({ type: 'HOME_TOGGLE_MAP', mapType: key });
@@ -35,15 +34,15 @@ actions.loadBubble = (product) => dispatch => {
         // console.log(moment().add(-x,'day').format('YYYY-MM-DD'));
         if(o.indexOf(product)>-1){
             if(productList.indexOf(o)>-1)
-                // temp.push([moment().add(-x,'day').format('YYYY-MM-DD'), y, size, o,true,require('../../img/logo.png')]);
-                temp.push([moment().add(-x,'day').format('YYYY-MM-DD'), y, size, o,true]);
+                temp.push([moment().add(-x,'day').format('YYYY-MM-DD'), y, size, o,true,'http://18.222.66.96/big-data2/'+o+'.png']);
+                // temp.push([moment().add(-x,'day').format('YYYY-MM-DD'), y, size, o,true,logo]);
             else
                 temp.push([moment().add(-x,'day').format('YYYY-MM-DD'), y, size, o,true]);
         }
         else{
             if(productList.indexOf(o)>-1)
-                // temp.push([moment().add(-x,'day').format('YYYY-MM-DD'), y, size, o,false,require('../../img/logo.png')]);
-                temp.push([moment().add(-x,'day').format('YYYY-MM-DD'), y, size, o,false]);
+                temp.push([moment().add(-x,'day').format('YYYY-MM-DD'), y, size, o,false,'http://18.222.66.96/big-data2/'+o+'.png']);
+                // temp.push([moment().add(-x,'day').format('YYYY-MM-DD'), y, size, o,false,logo]);
             else
                 temp.push([moment().add(-x,'day').format('YYYY-MM-DD'), y, size, o,false]);
         }
@@ -65,12 +64,15 @@ actions.refreshBubble = (product,chartData) => dispatch => {
 
 actions.loadMap = () => dispatch => {
     ajax.get('/report/device-report/getDeviceActiveOfDay',{},'http://63.33.199.83:8066').then(data=>{
-        console.log(data);
+        // console.log(data);
     })
     let option = {
         useGeo:true,
-    }
-    dispatch({type:'HOME_MAP_DATA',option});
+    };
+    const data = [{ name: '中国', value: 300 },
+        { name: '美国', value: 800 },
+        { name: '法国', value: 500 }]
+    dispatch({type:'HOME_MAP_DATA',option,data});
 }
 
 actions.loadFirstChart = (country) => dispatch => {
@@ -118,7 +120,7 @@ actions.loadFirstChart = (country) => dispatch => {
                 symbolSize: 8,
                 // realtime: false,
                 // loop: false,
-                autoPlay: true,
+                autoPlay: false,
                 // currentIndex: 2,
                 playInterval: 2000,
                 controlStyle: {
@@ -136,7 +138,8 @@ actions.loadFirstChart = (country) => dispatch => {
                         return s;
                     },
                     padding: [10, 0]
-                }
+                },
+                show:false
             },
             title: {
                 padding: [10, 10],
@@ -190,7 +193,7 @@ actions.loadFirstChart = (country) => dispatch => {
                     name: '人数(千)'
                 }
             ],
-            backgroundColor: 'rgba(0, 0, 0, 0.3)',
+            backgroundColor: 'rgba(255, 255, 255, 1)',
             series: [
                 { name: '男性', type: 'bar' },
                 { name: '女性', type: 'bar' },
@@ -323,8 +326,10 @@ actions.loadThirdChart = () => dispatch => {
         'xAxis.data': mockData.map((o)=>{return o.date}),
         'title.text':'半年内ROM激活量(千)',
         'yAxis.axisLabel.rotate': 45,
+        'yAxis.axisLine.show':false,
+        'yAxis.splitLine.show':true,
         // 'xAxis.axisLabel.rotate': 45,
-        // area: {}
+        area: {}
     };
     let data = [];
     for (let i = 0; i < mockData.length; i++) {
@@ -366,12 +371,13 @@ actions.loadFifthChart = () => dispatch => {
         'title.text':'ROM APP每日使用时长排行(分钟)',
         // subTitle: moment(new Date()).format('YYYY-MM-DD'),
         // legendData: [moment(new Date())],
-        yAxis: {},
+        'yAxis.axisLine.show':false,
+        'yAxis.splitLine.show':true,
         'xAxis.axisLabel.rotate': -45
     };
     let data = [];
     let x = [];
-    for (let i = 0; i < 17; i++) {
+    for (let i = 0; i < 12; i++) {
         data.push((Math.random() * 11).toFixed(1));
         x.push(list[i]);
     }

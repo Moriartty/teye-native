@@ -5,13 +5,13 @@ import renderChart from './renderChart';
 // import echarts from 'echarts';
 
 const iosPlatform = Platform.OS === 'ios'?true:false;
+const maskBgColor = 'rgba(0, 0, 0, 0.1)'
 export default class App extends Component {
 
   constructor(props) {
     super(props);
     this.setNewOption = this.setNewOption.bind(this);
   }
-
 
   componentWillReceiveProps(nextProps) {
     if(nextProps.option !== this.props.option) {

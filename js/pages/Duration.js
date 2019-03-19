@@ -3,10 +3,11 @@ import { Text, View,Image,InteractionManager } from 'react-native';
 import action from '../actions/home';
 import {connect} from 'react-redux';
 import ExChart from '../components/ExChart';
+import {withNavigation} from 'react-navigation';
 
-class Duration extends React.Component {
+class Duration extends React.PureComponent {
     componentWillMount() {
-        this.props.init();
+        // this.props.init();
     }
 
 
@@ -23,7 +24,7 @@ class Duration extends React.Component {
                     chartOption={chartData.option}
                     data={chartData.data}
                     width={'100%'}
-                    minHeight={300}
+                    minHeight={350}
                     onPress={this.handleClick}
                 />
             </View>
@@ -43,4 +44,4 @@ Duration = connect(state=>{
     }
 }))(Duration);
 
-export default Duration;
+export default withNavigation(Duration);
