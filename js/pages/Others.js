@@ -10,25 +10,36 @@ import Habit from './Habit';
 import Duration from './Duration';
 import theme from '../config/theme';
 import {Carousel} from '@ant-design/react-native';
+import LoadingScreen from '../components/LoadingScreen';
 
 class Others extends React.Component{
     componentWillMount() {
         this.props.init();
     }
     render(){
+        const {first,second,third,fourth,fifth,webViewLoad} = this.props;
         return (
             <View style={styles.othersContainer}>
-
                 <Carousel
                     style={styles.wrapper}
                     selectedIndex={0}
                     // autoplay
                 >
-                    <View style={styles.subWrapper}><UserPortrait/></View>
-                    <View style={styles.subWrapper}><PainPoint/></View>
-                    <View style={styles.subWrapper}><Activation/></View>
-                    <View style={styles.subWrapper}><Habit/></View>
-                    <View style={styles.subWrapper}><Duration/></View>
+                    <LoadingScreen style={styles.subWrapper} show={!(first.data&&first.data.length&&first.webViewLoad)}>
+                        <UserPortrait handleWebViewLoad={webViewLoad}/>
+                    </LoadingScreen>
+                    <LoadingScreen style={styles.subWrapper} show={!(second.data&&second.data.length&&second.webViewLoad)}>
+                        <PainPoint handleWebViewLoad={webViewLoad}/>
+                    </LoadingScreen>
+                    <LoadingScreen style={styles.subWrapper} show={!(third.data&&third.data.length&&third.webViewLoad)}>
+                        <Activation handleWebViewLoad={webViewLoad}/>
+                    </LoadingScreen>
+                    <LoadingScreen style={styles.subWrapper} show={!(fourth.data&&fourth.data.length&&fourth.webViewLoad)}>
+                        <Habit handleWebViewLoad={webViewLoad}/>
+                    </LoadingScreen>
+                    <LoadingScreen style={styles.subWrapper} show={!(fifth.data&&fifth.data.length&&fifth.webViewLoad)}>
+                        <Duration handleWebViewLoad={webViewLoad}/>
+                    </LoadingScreen>
                 </Carousel>
             </View>
         )
@@ -36,15 +47,24 @@ class Others extends React.Component{
 }
 
 Others = connect(state=>{
-    const {mapType} = state['home'];
-    return {mapType};
+    const {mapType,firstChartData:first,secondChartData:second,thirdChartData:third,fourthChartData:fourth,fifthChartData:fifth} = state['home'];
+    return {mapType,first,second,third,fourth,fifth};
 },dispatch=>({
     init(){
+        // setTimeout(function(){
+        //     dispatch(action.loadSecondChart());
+        //     dispatch(action.loadThirdChart());
+        //     dispatch(action.loadFourthChart());
+        //     dispatch(action.loadFifthChart());
+        //     },5000);
         dispatch(action.loadFirstChart());
         dispatch(action.loadSecondChart());
         dispatch(action.loadThirdChart());
         dispatch(action.loadFourthChart());
         dispatch(action.loadFifthChart());
+    },
+    webViewLoad(key,value){
+        dispatch({type:'HOME_WEBVIEW_LOAD',key,value});
     }
 }))(Others);
 
@@ -63,7 +83,7 @@ const styles = StyleSheet.create({
         width:'100%',
         height:'100%',
         // flex:1,
-        // justifyContent:'center'
+        justifyContent:'center'
     },
     containerHorizontal: {
         flexGrow: 1,

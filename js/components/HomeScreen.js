@@ -73,6 +73,11 @@ class HomeScreen extends React.Component {
         }
     }
 
+    componentWillMount() {
+        // this.props.init();
+        this.props.navigation.setParams({handleNavClick:this.handleNavClick})
+    }
+
     componentWillReceiveProps(nextProps) {
         if(this.props.activePage==''&&nextProps.activePage&&this.props.activePage!==nextProps.activePage){
             const {navigation,menu,activePage} = nextProps;
@@ -84,11 +89,6 @@ class HomeScreen extends React.Component {
     handleNavClick = () => {
         const {toggleSidebar,openSidebar} = this.props;
         toggleSidebar(!openSidebar);
-    }
-
-    componentWillMount() {
-        this.props.init();
-        this.props.navigation.setParams({handleNavClick:this.handleNavClick})
     }
 
     render() {
@@ -108,9 +108,12 @@ HomeScreen = connect(state=>{
         dispatch({type:'APP_TOGGLE_SIDEBAR',openSidebar:openState})
     },
     init(){
-        setTimeout(function(){dispatch(action.loadMap())},5000);
+        // setTimeout(function(){dispatch(action.loadMap())},5000);
+        // setTimeout(function(){dispatch(action.loadBubble())},5000);
+        dispatch(action.loadMap());
         dispatch(action.loadBubble());
         dispatch(action.loadFirstChart());
+        // setTimeout(function(){dispatch(action.loadSecondChart());},5000)
         dispatch(action.loadSecondChart());
         dispatch(action.loadThirdChart());
         dispatch(action.loadFourthChart());

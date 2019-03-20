@@ -16,7 +16,7 @@ class Duration extends React.PureComponent {
         this.props.reHref(appName,e.data,this.props.navigation.navigate);
     }
     render() {
-        const {fifthChartData:chartData} = this.props;
+        const {fifthChartData:chartData,handleWebViewLoad} = this.props;
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 <ExChart
@@ -26,6 +26,7 @@ class Duration extends React.PureComponent {
                     width={'100%'}
                     minHeight={350}
                     onPress={this.handleClick}
+                    onLoadEnd={handleWebViewLoad.bind(this,'fifthChartData',true)}
                 />
             </View>
         );

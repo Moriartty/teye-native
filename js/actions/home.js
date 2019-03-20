@@ -63,9 +63,9 @@ actions.refreshBubble = (product,chartData) => dispatch => {
 };
 
 actions.loadMap = () => dispatch => {
-    ajax.get('/report/device-report/getDeviceActiveOfDay',{},'http://63.33.199.83:8066').then(data=>{
-        // console.log(data);
-    })
+    // ajax.get('/report/device-report/getDeviceActiveOfDay',{},'http://63.33.199.83:8066').then(data=>{
+    //     // console.log(data);
+    // })
     let option = {
         useGeo:true,
     };

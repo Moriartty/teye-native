@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { WebView, View, StyleSheet, Platform } from 'react-native';
+import { WebView, View, StyleSheet, Platform ,Text} from 'react-native';
 import renderChart from './renderChart';
 // import echarts from './echarts.min';
 // import echarts from 'echarts';
@@ -32,10 +32,13 @@ export default class App extends Component {
           injectedJavaScript = {renderChart(this.props)}
           style={{
             height: this.props.height || 400,
-            backgroundColor: this.props.backgroundColor || 'transparent'
+            // backgroundColor: this.props.backgroundColor || 'transparent'
+            backgroundColor:'transparent'
           }}
+          renderLoading={()=>{return <View style={{backgroundColor:this.props.backgroundColor||'white'}}></View>}}
           scalesPageToFit={Platform.OS !== 'ios'}
           originWhitelist={['*']}
+          onLoadEnd={this.props.onLoadEnd}
           source={iosPlatform?require('./tpl.html'):{uri:'file:///android_asset/tpl.html'}}
           onMessage={event => this.props.onPress ? this.props.onPress(JSON.parse(event.nativeEvent.data)) : null}
         />

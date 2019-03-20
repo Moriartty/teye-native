@@ -11,10 +11,10 @@ import LoadingScreen from '../components/LoadingScreen';
 
 class Home extends React.Component{
     componentWillMount() {
-        // this.props.init();
+        this.props.init();
     }
     render(){
-        const {mapChartData} = this.props;
+        const {mapChartData,bubbleChartData,webViewLoad} = this.props;
         return (
             <View style={styles.homeContainer}>
                 <Carousel
@@ -23,19 +23,22 @@ class Home extends React.Component{
                     // infinite
                     // afterChange={this.onHorizontalSelectedIndexChange}
                 >
-                    <View style={styles.subWrapper}>
-                        <WorldMap/>
-                    </View>
-                    {/*<LoadingScreen*/}
-                        {/*style={styles.subWrapper}*/}
-                        {/*data={mapChartData.data}*/}
-                        {/*loadingStyle={{size:'large',color:'white'}}*/}
-                    {/*>*/}
-                        {/*<WorldMap/>*/}
-                    {/*</LoadingScreen>*/}
-                    <View style={styles.subWrapper}>
-                        <BubbleChart/>
-                    </View>
+                    <LoadingScreen
+                        style={styles.subWrapper}
+                        // data={mapChartData.data}
+                        show={!(mapChartData.data&&mapChartData.data.length&&mapChartData.webViewLoad)}
+                        loadingStyle={{size:'large',color:'white'}}
+                    >
+                        <WorldMap handleWebViewLoad={webViewLoad}/>
+                    </LoadingScreen>
+                    <LoadingScreen
+                        style={styles.subWrapper}
+                        // data={bubbleChartData.data}
+                        show={!(bubbleChartData.data&&bubbleChartData.data.length&&bubbleChartData.webViewLoad)}
+                        loadingStyle={{size:'large',color:'white'}}
+                    >
+                        <BubbleChart handleWebViewLoad={webViewLoad}/>
+                    </LoadingScreen>
                 </Carousel>
             </View>
         )
@@ -43,12 +46,19 @@ class Home extends React.Component{
 }
 
 Home = connect(state=>{
-    const {mapType,mapChartData} = state['home'];
-    return {mapType,mapChartData};
+    const {mapType,mapChartData,bubbleChartData} = state['home'];
+    return {mapType,mapChartData,bubbleChartData};
 },dispatch=>({
     init(){
+        // setTimeout(function () {
+        //     dispatch(action.loadMap());
+        //     dispatch(action.loadBubble());
+        // },5000)
         dispatch(action.loadMap());
         dispatch(action.loadBubble());
+    },
+    webViewLoad(key,value){
+        dispatch({type:'HOME_WEBVIEW_LOAD',key,value});
     }
 }))(Home);
 

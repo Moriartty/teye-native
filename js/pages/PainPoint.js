@@ -9,7 +9,7 @@ class PainPoint extends React.PureComponent {
         // this.props.init();
     }
     render() {
-        const {secondChartData:chartData} = this.props;
+        const {secondChartData:chartData,handleWebViewLoad} = this.props;
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 <ExChart
@@ -19,6 +19,7 @@ class PainPoint extends React.PureComponent {
                     width={'100%'}
                     minHeight={380}
                     // onClick={this.handleClick}
+                    onLoadEnd={handleWebViewLoad.bind(this,'secondChartData',true)}
                 />
             </View>
         );

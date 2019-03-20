@@ -9,7 +9,7 @@ class Habit extends React.PureComponent {
         // this.props.init();
     }
     render() {
-        const {fourthChartData:chartData} = this.props;
+        const {fourthChartData:chartData,handleWebViewLoad} = this.props;
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 <ExChart
@@ -19,6 +19,7 @@ class Habit extends React.PureComponent {
                     width={'100%'}
                     minHeight={350}
                     // onClick={this.handleClick}
+                    onLoadEnd={handleWebViewLoad.bind(this,'fourthChartData',true)}
                 />
             </View>
         );

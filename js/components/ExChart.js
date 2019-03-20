@@ -76,11 +76,18 @@ class ExChart extends React.Component{
     }
 
     render () {
-        const { minHeight, width , onPress} = this.props;
+        const { minHeight, width , onPress,onLoadEnd, backgroundColor} = this.props;
         // let clientWidth = document.body.clientWidth;
         if(JSON.stringify(this.options)!=='{}'){
             return (
-                <Echart option={this.options} width={width||400} height={minHeight||500} onPress={onPress}></Echart>
+                <Echart
+                    option={this.options}
+                    width={width||400}
+                    height={minHeight||500}
+                    onPress={onPress}
+                    onLoadEnd={onLoadEnd}
+                    backgroundColor={backgroundColor}
+                ></Echart>
             );
         }else
             return <View></View>;

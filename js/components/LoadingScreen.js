@@ -1,36 +1,29 @@
 import React from 'react';
 import {ActivityIndicator} from '@ant-design/react-native';
 import {View,Text} from 'react-native';
+import theme from '../config/theme';
 
-class LoadingScreen extends React.Component{
+class LoadingScreen extends React.PureComponent{
     constructor(props){
         super(props);
+
     }
 
-    componentWillReceiveProps(nextProps) {
-        const {data} = nextProps;
-        console.log('data',data,data&&data.length>0);
-    }
+    // componentWillReceiveProps(nextProps) {
+    //     const {data} = nextProps;
+    //     console.log('data',data,data&&data.length>0);
+    // }
 
-    componentDidUpdate() {
-        console.log('updated')
-    }
     render(){
-        const {style,data,loadingStyle} = this.props;
-        // console.log('data',data,data&&data.length>0);
-        // console.log('child',this.props.children)
-        let comp = data&&data.length>0?
-            this.props.children
-            :
-            this.props.children
-
-        console.log('comp',comp)
+        const {style,show,loadingStyle} = this.props;
         return (
             <View style={style}>
-                {
-                    // comp
-                    this.props.children
-                }
+                <ActivityIndicator
+                    size={loadingStyle?loadingStyle.size:'large'}
+                    color={loadingStyle?loadingStyle.color:theme["primary-color"]}
+                    animating={show}
+                />
+                {this.props.children}
             </View>
         )
     }

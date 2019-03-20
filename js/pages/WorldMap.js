@@ -3,6 +3,7 @@ import React from 'react';
 import ExChart from '../components/ExChart';
 import { connect } from 'react-redux';
 import action from '../actions/home';
+import theme from '../config/theme'
 
 let geoCoordMap = {
     '中国': [116.46, 39.92],
@@ -36,17 +37,23 @@ class WorldMap extends React.PureComponent {
             this.props.clearSelectedCountry();
         }
     }
+
+    componentWillReceiveProps(nextProps) {
+        console.log(nextProps);
+    }
     render () {
-        const { width, height, id,selectedCountry, mapChartData:chartData } = this.props;
-        console.log('bbb');
+        console.log('finish')
+        const { width, height, id,selectedCountry, mapChartData:chartData,handleWebViewLoad } = this.props;
         return (
             <ExChart
                 opt={{ type: 'heat-map' ,selectedCountry:selectedCountry}}
-                data={convertData(chartData.data)}
+                data={chartData.webViewLoad&&convertData(chartData.data)}
                 chartOption={chartData.option}
                 width={'100%'}
                 minHeight={300}
                 onPress={this.handleClick}
+                onLoadEnd={handleWebViewLoad.bind(this,'mapChartData',true)}
+                backgroundColor={theme["primary-color"]}
             />
         );
     }

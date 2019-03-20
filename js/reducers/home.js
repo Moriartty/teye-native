@@ -4,32 +4,39 @@ const defaultState = {
     mapType: 'map',
     mapChartData:{
         data:[],
-        option:{}
+        option:{},
+        webViewLoad:false
     },
     selectedProduct:'',
     selectedCountry:'world',
     bubbleChartData: {
         data: [],
         option: {},
+        webViewLoad:false
     },
     firstChartData: {
-        option:{}
+        option:{},
+        webViewLoad:false
     },
     secondChartData: {
-        data: {},
-        option: {}
+        data: [],
+        option: {},
+        webViewLoad:false
     },
     thirdChartData: {
         data: [],
-        option: {}
+        option: {},
+        webViewLoad:false
     },
     fourthChartData: {
-        data: {},
-        option: {}
+        data: [],
+        option: {},
+        webViewLoad:false
     },
     fifthChartData:{
         option:{},
-        data:[]
+        data:[],
+        webViewLoad:false
     }
 };
 
@@ -39,7 +46,8 @@ export default (state,action) => {
         case 'HOME_MAP_DATA':
             newState.mapChartData = {
                 data: action.data,
-                option: action.option
+                option: action.option,
+                webViewLoad:state.mapChartData.webViewLoad
             };
             break;
         case 'HOME_BUBBLE_DATA':
@@ -83,6 +91,16 @@ export default (state,action) => {
                 option:action.option,
                 data:action.data
             };
+            break;
+        case 'HOME_WEBVIEW_LOAD':
+            if(state&&state[action.key].webViewLoad)
+                return state || defaultState;
+            else
+                newState[action.key] = {
+                    option:state[action.key].option,
+                    data:state[action.key].data,
+                    webViewLoad:true
+                };
             break;
         default : return state||defaultState;
     }

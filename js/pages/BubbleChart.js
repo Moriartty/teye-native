@@ -2,18 +2,21 @@ import ExChart from '../components/ExChart';
 import { connect } from 'react-redux';
 import React from 'react';
 import action from '../actions/home';
+import theme from "../config/theme";
 
 class BubbleChart extends React.PureComponent {
     render () {
-        const { width, height, id, bubbleChartData: chartData } = this.props;
+        const { width, height, id, bubbleChartData: chartData,handleWebViewLoad } = this.props;
         return (
             <ExChart
                 opt={{ type: 'le-chart' }}
                 data={chartData.data}
                 // chartOption={option}
                 width={'100%'}
-                minHeight={350}
-                onClick={this.props.onClick}
+                minHeight={380}
+                onPress={this.props.onClick}
+                onLoadEnd={handleWebViewLoad.bind(this,'bubbleChartData',true)}
+                backgroundColor={theme["primary-color"]}
             />
         );
     }
