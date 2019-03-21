@@ -46,6 +46,26 @@ class App extends Component<Props> {
 
     render() {
         const {openSidebar:openState,toggleSidebar,switchPage,menu,activePage} = this.props;
+        const menuEl = menu.map((o,i)=>{
+            return o.display?(
+                <Accordion.Panel header={o.name} key={o.id}>
+                    <List>
+                        {
+                            o.list.map(item=>{
+                                return item.display?(
+                                    <List.Item key={item.id} style={styles.listItem} onPress={switchPage.bind(this,item.id)}>
+                                        <Flex direction={'row'}>
+                                            <Flex.Item flex={1}><Icon name={item.icon} style={{color:item.id===activePage?'#1890ff':'#595959'}}/></Flex.Item>
+                                            <Flex.Item flex={4}><Text style={{color:item.id===activePage?'#1890ff':'#595959'}}>{item.name}</Text></Flex.Item>
+                                        </Flex>
+                                    </List.Item>
+                                ):''
+                            })
+                        }
+                    </List>
+                </Accordion.Panel>
+            ):undefined
+        }).filter(item=>item);
         const sidebar = (
             <ScrollView style={styles.sidebar}>
                 <SafeAreaView>
@@ -71,26 +91,7 @@ class App extends Component<Props> {
                         activeSections={this.state.activeSections}
                         style={styles.sidebarContent}>
                         {
-                            menu.map((o,i)=>{
-                                return (
-                                    <Accordion.Panel header={o.name} key={o.id}>
-                                        <List>
-                                            {
-                                                o.list.map(item=>{
-                                                    return (
-                                                        <List.Item key={item.id} style={styles.listItem} onPress={switchPage.bind(this,item.id)}>
-                                                            <Flex direction={'row'}>
-                                                                <Flex.Item flex={1}><Icon name={item.icon} style={{color:item.id===activePage?'#1890ff':'#595959'}}/></Flex.Item>
-                                                                <Flex.Item flex={4}><Text style={{color:item.id===activePage?'#1890ff':'#595959'}}>{item.name}</Text></Flex.Item>
-                                                            </Flex>
-                                                        </List.Item>
-                                                    )
-                                                })
-                                            }
-                                        </List>
-                                    </Accordion.Panel>
-                                )
-                            })
+                            menuEl
                         }
                     </Accordion>
                 </SafeAreaView>
@@ -116,7 +117,7 @@ class App extends Component<Props> {
                                     if(newState.routes.length==1&&newState.routes[0].routeName=='Home')
                                         switchPage('');
                                     else{
-                                        console.log('newState',newState.routes);
+                                        // console.log('newState',newState.routes);
                                         const length = newState.routes.length;
                                         menu.forEach((o,i)=>{
                                             o.list.forEach(item=>{

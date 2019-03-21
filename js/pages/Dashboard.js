@@ -12,12 +12,10 @@ class Dashboard extends React.Component{
                 domStorageEnabled={true}
                 injectedJavaScript={patchPostMessageJsCode}
                 onMessage={switchPage}
-                // ref={el=>(this.webView = el)}
             />
         )
     }
 }
 
 export default Dashboard;
-
 

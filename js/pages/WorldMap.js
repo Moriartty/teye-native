@@ -4,6 +4,7 @@ import ExChart from '../components/ExChart';
 import { connect } from 'react-redux';
 import action from '../actions/home';
 import theme from '../config/theme'
+import {View} from 'react-native';
 
 let geoCoordMap = {
     '中国': [116.46, 39.92],
@@ -28,33 +29,27 @@ class WorldMap extends React.PureComponent {
     }
     handleClick = (e) => {
         if (e.name !== this.props.selectedCountry) {
-            console.log(1,e.name,this.props.selectedCountry)
-            // this.setState({ selectCountry: e.name });
             this.props.bindSelectedCountry(e.name);
         }else{
-            console.log(2,e.name,this.props.selectedCountry)
-            // this.setState({selectCountry:''});
             this.props.clearSelectedCountry();
         }
     }
 
-    componentWillReceiveProps(nextProps) {
-        console.log(nextProps);
-    }
     render () {
-        console.log('finish')
         const { width, height, id,selectedCountry, mapChartData:chartData,handleWebViewLoad } = this.props;
         return (
-            <ExChart
-                opt={{ type: 'heat-map' ,selectedCountry:selectedCountry}}
-                data={chartData.webViewLoad&&convertData(chartData.data)}
-                chartOption={chartData.option}
-                width={'100%'}
-                minHeight={300}
-                onPress={this.handleClick}
-                onLoadEnd={handleWebViewLoad.bind(this,'mapChartData',true)}
-                backgroundColor={theme["primary-color"]}
-            />
+            <View>
+                <ExChart
+                    opt={{ type: 'heat-map' ,selectedCountry:selectedCountry}}
+                    data={chartData.webViewLoad&&convertData(chartData.data)}
+                    chartOption={chartData.option}
+                    width={'100%'}
+                    minHeight={300}
+                    onPress={this.handleClick}
+                    onLoadEnd={handleWebViewLoad.bind(this,'mapChartData',true)}
+                    backgroundColor={theme["primary-color"]}
+                />
+            </View>
         );
     }
 }

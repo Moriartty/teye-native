@@ -5,6 +5,7 @@ import {patchPostMessageJsCode,findTargetMenu} from "../utils";
 import Dashboard from '../pages/Dashboard';
 import StreamView from '../pages/StreamView';
 import Conversions from '../pages/Conversions';
+import Dashboard2 from '../pages/Dashboard2';
 
 
 class MasterPage extends React.Component{
@@ -15,10 +16,12 @@ class MasterPage extends React.Component{
     }
     constructor(props){
         super(props);
+        const params = this.props.navigation.state.params;
         this.moduleMap = {
             _dashboard:<Dashboard switchPage={this.reHref}/>,
             _streamView:<StreamView/>,
-            _conversions:<Conversions/>
+            _conversions:<Conversions/>,
+            _dashboard2:<Dashboard2 {...params}/>
         }
     }
     reHref = (e) => {
