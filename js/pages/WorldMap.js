@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import action from '../actions/home';
 import theme from '../config/theme'
 import {View} from 'react-native';
+import NumScroll from '../components/NumScroll';
 
 let geoCoordMap = {
     '中国': [116.46, 39.92],
@@ -39,6 +40,7 @@ class WorldMap extends React.PureComponent {
         const { width, height, id,selectedCountry, mapChartData:chartData,handleWebViewLoad } = this.props;
         return (
             <View>
+                <NumScroll width={'100%'} height={150} />
                 <ExChart
                     opt={{ type: 'heat-map' ,selectedCountry:selectedCountry}}
                     data={chartData.webViewLoad&&convertData(chartData.data)}

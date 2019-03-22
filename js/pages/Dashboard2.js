@@ -4,14 +4,14 @@ import {patchPostMessageJsCode} from "../utils";
 
 class Dashboard2 extends React.Component{
 
-    // componentDidMount() {
-    //     const params = this.props;
-    //     console.log(this.webView);
-    //     this.webView.postMessage(JSON.stringify(params));
-    // }
-    // recMessage = (e) => {
-    //     console.logo('bbb');
-    // }
+    componentDidMount() {
+        const params = this.props;
+        // console.log(this.webView,JSON.stringify(params));
+        // setTimeout(()=>this.refs.test.postMessage(JSON.stringify(params)),5000);
+    }
+    recMessage = (e) => {
+        console.log(e.nativeEvent.data);
+    }
     render(){
         const {handleWebViewLoad} = this.props;
         return (
@@ -20,9 +20,10 @@ class Dashboard2 extends React.Component{
                 startInLoadingState={false}
                 domStorageEnabled={true}
                 injectedJavaScript={patchPostMessageJsCode}
+                onLoadStart={()=>this.refs.test.postMessage(JSON.stringify(this.props))}
                 onLoadEnd={handleWebViewLoad.bind(this,'dashboard2',true)}
-                // onMessage={this.recMessage}
-                ref={el=>this.webView = el}
+                onMessage={this.recMessage}
+                ref={'test'}
             />
         )
     }
