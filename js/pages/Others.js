@@ -51,12 +51,6 @@ Others = connect(state=>{
     return {mapType,first,second,third,fourth,fifth};
 },dispatch=>({
     init(){
-        // setTimeout(function(){
-        //     dispatch(action.loadSecondChart());
-        //     dispatch(action.loadThirdChart());
-        //     dispatch(action.loadFourthChart());
-        //     dispatch(action.loadFifthChart());
-        //     },5000);
         dispatch(action.loadFirstChart());
         dispatch(action.loadSecondChart());
         dispatch(action.loadThirdChart());
