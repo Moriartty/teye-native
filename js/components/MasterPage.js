@@ -1,11 +1,12 @@
 import React from 'react';
-import {View,WebView,StyleSheet,Alert,Text} from 'react-native';
+import {View,WebView,StyleSheet,Alert,Text,Picker} from 'react-native';
 import {connect} from 'react-redux';
 import {patchPostMessageJsCode,findTargetMenu} from "../utils";
 import Dashboard from '../pages/Dashboard';
 import StreamView from '../pages/StreamView';
 import Conversions from '../pages/Conversions';
 import Dashboard2 from '../pages/Dashboard2';
+import Dashboard3 from '../pages/Dashboard3';
 import LoadingScreen from '../components/LoadingScreen';
 
 
@@ -23,7 +24,8 @@ class MasterPage extends React.Component{
             _dashboard:<Dashboard switchPage={this.reHref} handleWebViewLoad={webViewLoad}/>,
             _streamView:<StreamView handleWebViewLoad={webViewLoad}/>,
             _conversions:<Conversions handleWebViewLoad={webViewLoad}/>,
-            _dashboard2:<Dashboard2 {...params} handleWebViewLoad={webViewLoad}/>
+            _dashboard2:<Dashboard2 {...params} handleWebViewLoad={webViewLoad}/>,
+            _dashboard3:<Dashboard3 {...params} handleWebViewLoad={webViewLoad}/>
         }
     }
     reHref = (e) => {
@@ -56,7 +58,11 @@ class MasterPage extends React.Component{
 const styles = StyleSheet.create({
     masterPage:{
         width:'100%',
-        height:'100%'
+        height:'100%',
+        flex:1,
+        flexDirection:'column',
+        alignItems:'center',
+        justifyContent:'center'
     },
     subWrapper:{
         width:'100%',
@@ -67,8 +73,8 @@ const styles = StyleSheet.create({
 
 MasterPage = connect(state=>{
     const {activePage,menu} = state['app'];
-    const {dashboard,streamView,conversions,dashboard2} = state['master'];
-    return {activePage,menu,dashboard,streamView,conversions,dashboard2};
+    const {dashboard,streamView,conversions,dashboard2,dashboard3} = state['master'];
+    return {activePage,menu,dashboard,streamView,conversions,dashboard2,dashboard3};
 },dispatch=>({
     switchPage(id,f,module){
         dispatch({type:'APP_SWITCH_PAGE',activePage:id});

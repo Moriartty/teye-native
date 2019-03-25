@@ -12,6 +12,9 @@ const defaultState = {
     },
     dashboard2:{
         webViewLoad:false
+    },
+    dashboard3:{
+        webViewLoad:false
     }
 };
 

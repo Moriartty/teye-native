@@ -29,6 +29,7 @@ class WorldMap extends React.PureComponent {
         // this.state = { selectCountry: '' };
     }
     handleClick = (e) => {
+        console.log('log',e.name,this.props.selectedCountry)
         if (e.name !== this.props.selectedCountry) {
             this.props.bindSelectedCountry(e.name);
         }else{
@@ -42,12 +43,12 @@ class WorldMap extends React.PureComponent {
             <View>
                 <NumScroll width={'100%'} height={150} />
                 <ExChart
-                    opt={{ type: 'heat-map' ,selectedCountry:selectedCountry}}
+                    opt={{ type: 'heat-map' }}
                     data={chartData.webViewLoad&&convertData(chartData.data)}
                     chartOption={chartData.option}
                     width={'100%'}
                     minHeight={300}
-                    onPress={this.handleClick}
+                    // onPress={this.handleClick}
                     onLoadEnd={handleWebViewLoad.bind(this,'mapChartData',true)}
                     backgroundColor={theme["primary-color"]}
                 />

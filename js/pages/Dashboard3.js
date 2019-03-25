@@ -2,7 +2,7 @@ import React from 'react';
 import {WebView} from 'react-native';
 import {patchPostMessageJsCode} from "../utils";
 
-class Dashboard2 extends React.Component{
+class Dashboard3 extends React.Component{
 
     componentDidMount() {
         const params = this.props;
@@ -16,18 +16,18 @@ class Dashboard2 extends React.Component{
         const {handleWebViewLoad} = this.props;
         return (
             <WebView
-                source={{uri:'http://18.222.66.96/big-data2/_dashboard2.html'}}
+                source={{uri:'http://18.222.66.96/big-data2/_dashboard3.html'}}
                 startInLoadingState={false}
                 domStorageEnabled={true}
                 injectedJavaScript={patchPostMessageJsCode}
-                onLoad={()=>this.refs.dashboard2.postMessage(JSON.stringify(this.props))}
-                onLoadEnd={handleWebViewLoad.bind(this,'dashboard2',true)}
+                onLoad={()=>this.refs.dashboard3.postMessage(JSON.stringify(this.props))}
+                onLoadEnd={handleWebViewLoad.bind(this,'dashboard3',true)}
                 onMessage={this.recMessage}
-                ref={'dashboard2'}
+                ref={'dashboard3'}
             />
         )
     }
 }
 
-export default Dashboard2;
+export default Dashboard3;
 

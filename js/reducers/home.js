@@ -102,6 +102,18 @@ export default (state,action) => {
                     webViewLoad:true
                 };
             break;
+        case 'HOME_COUNTRY_CHANGE':
+            // if(action.selectedCountry=='United States'){
+            //     // action.selectedCountry='USA'
+            //     action.selectedCountry='United States'
+            // }
+            if(state.selectedCountry==action.selectedCountry){
+                newState.selectedCountry = 'world';
+            }else{
+                newState.selectedCountry = action.selectedCountry;
+            }
+
+            break;
         default : return state||defaultState;
     }
     return objectAppend(newState,state);

@@ -1,6 +1,6 @@
 
 import React from 'react';
-import {View,StyleSheet,Text} from 'react-native';
+import {View,StyleSheet,Text,Picker} from 'react-native';
 import {connect} from 'react-redux';
 import action from '../actions/home';
 import UserPortrait from './UserPortrait';
@@ -20,6 +20,16 @@ class Others extends React.Component{
         const {first,second,third,fourth,fifth,webViewLoad} = this.props;
         return (
             <View style={styles.othersContainer}>
+                {/*<View style={{ height: 100, width: '100%',flex:1,justifyContent:'center',marginTop:30}}>*/}
+                    {/*<Picker*/}
+                        {/*selectedValue={'java'}*/}
+                        {/*style={{ height: 50 }}*/}
+                        {/*// onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}*/}
+                    {/*>*/}
+                        {/*<Picker.Item label="Java" value="java" />*/}
+                        {/*<Picker.Item label="JavaScript" value="js" />*/}
+                    {/*</Picker>*/}
+                {/*</View>*/}
                 <Carousel
                     style={styles.wrapper}
                     selectedIndex={0}
@@ -68,6 +78,7 @@ const styles = StyleSheet.create({
         width:'100%',
         height:'100%',
         flex:1,
+        flexDirection:'column',
         justifyContent:'center'
     },
     wrapper: {

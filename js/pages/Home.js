@@ -13,6 +13,10 @@ class Home extends React.Component{
     componentWillMount() {
         this.props.init();
     }
+
+    componentWillReceiveProps(nextProps) {
+
+    }
     render(){
         const {mapChartData,bubbleChartData,webViewLoad} = this.props;
         return (
@@ -20,6 +24,7 @@ class Home extends React.Component{
                 <Carousel
                     style={styles.wrapper}
                     selectedIndex={0}
+                    dotActiveStyle={{backgroundColor:'#ffc53d'}}
                     // infinite
                     // afterChange={this.onHorizontalSelectedIndexChange}
                 >
