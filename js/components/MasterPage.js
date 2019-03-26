@@ -7,6 +7,7 @@ import StreamView from '../pages/StreamView';
 import Conversions from '../pages/Conversions';
 import Dashboard2 from '../pages/Dashboard2';
 import Dashboard3 from '../pages/Dashboard3';
+import Dashboard4 from '../pages/Dashboard4';
 import LoadingScreen from '../components/LoadingScreen';
 
 
@@ -25,7 +26,8 @@ class MasterPage extends React.Component{
             _streamView:<StreamView handleWebViewLoad={webViewLoad}/>,
             _conversions:<Conversions handleWebViewLoad={webViewLoad}/>,
             _dashboard2:<Dashboard2 {...params} handleWebViewLoad={webViewLoad}/>,
-            _dashboard3:<Dashboard3 {...params} handleWebViewLoad={webViewLoad}/>
+            _dashboard3:<Dashboard3 {...params} handleWebViewLoad={webViewLoad}/>,
+            _dashboard4:<Dashboard4 {...params} handleWebViewLoad={webViewLoad}/>
         }
     }
     reHref = (e) => {
@@ -73,8 +75,8 @@ const styles = StyleSheet.create({
 
 MasterPage = connect(state=>{
     const {activePage,menu} = state['app'];
-    const {dashboard,streamView,conversions,dashboard2,dashboard3} = state['master'];
-    return {activePage,menu,dashboard,streamView,conversions,dashboard2,dashboard3};
+    const {dashboard,streamView,conversions,dashboard2,dashboard3,dashboard4} = state['master'];
+    return {activePage,menu,dashboard,streamView,conversions,dashboard2,dashboard3,dashboard4};
 },dispatch=>({
     switchPage(id,f,module){
         dispatch({type:'APP_SWITCH_PAGE',activePage:id});

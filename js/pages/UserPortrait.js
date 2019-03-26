@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View,Image,Button } from 'react-native';
 import {connect} from 'react-redux';
 import ExChart from '../components/ExChart';
-import Echart from 'native-echarts';
+import Echart from '../components/Native-Echart';
 import action from '../actions/home';
 import {withNavigation} from 'react-navigation';
 
@@ -119,7 +119,7 @@ const option = {
             axisType: 'category',
             // realtime: false,
             // loop: false,
-            autoPlay: true,
+            autoPlay: false,
             // currentIndex: 2,
             playInterval: 1000,
             // controlStyle: {
@@ -390,7 +390,7 @@ class UserPortrait extends React.PureComponent {
         this.props.reHref(this.props.navigation.navigate);
     }
     render() {
-        const {firstChartData:chartData} = this.props;
+        const {firstChartData:chartData,handleWebViewLoad} = this.props;
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 {/*<ExChart*/}
@@ -405,6 +405,9 @@ class UserPortrait extends React.PureComponent {
                     option={option}
                     width={400}
                     height={400}
+                    backgroundColor={'#000'}
+                    onLoadEnd={handleWebViewLoad.bind(this,'firstChartData',true)}
+                    // onLoadEnd={()=>console.log('fuck you')}
                 />
             </View>
         );

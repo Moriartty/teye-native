@@ -50,7 +50,7 @@ class WorldMap extends React.PureComponent {
                     minHeight={300}
                     // onPress={this.handleClick}
                     onLoadEnd={handleWebViewLoad.bind(this,'mapChartData',true)}
-                    backgroundColor={theme["primary-color"]}
+                    // backgroundColor={theme["primary-color"]}
                 />
             </View>
         );

@@ -32,12 +32,14 @@ export default class App extends Component {
           injectedJavaScript = {renderChart(this.props)}
           style={{
             height: this.props.height || 400,
-            // backgroundColor: this.props.backgroundColor || 'transparent'
-            backgroundColor:'transparent'
+            backgroundColor: this.props.backgroundColor || 'transparent'
+            // backgroundColor:'transparent'
           }}
           renderLoading={()=>{return <View style={{backgroundColor:this.props.backgroundColor||'white'}}></View>}}
           scalesPageToFit={Platform.OS !== 'ios'}
           originWhitelist={['*']}
+          onError={this.props.onError}
+          onLoad={this.props.onLoad}
           onLoadEnd={this.props.onLoadEnd}
           source={iosPlatform?require('./tpl.html'):{uri:'file:///android_asset/tpl.html'}}
           onMessage={event => this.props.onPress ? this.props.onPress(JSON.parse(event.nativeEvent.data)) : null}

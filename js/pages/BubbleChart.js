@@ -23,7 +23,7 @@ class BubbleChart extends React.PureComponent {
                     minHeight={380}
                     onPress={this.props.onClick}
                     onLoadEnd={handleWebViewLoad.bind(this,'bubbleChartData',true)}
-                    backgroundColor={theme["primary-color"]}
+                    // backgroundColor={theme["primary-color"]}
                 />
             </KeyboardAvoidingView>
         );

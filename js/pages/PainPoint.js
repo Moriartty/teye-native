@@ -3,10 +3,15 @@ import { Text, View,Image } from 'react-native';
 import ExChart from '../components/ExChart';
 import {connect} from 'react-redux';
 import action from '../actions/home'
+import {withNavigation} from 'react-navigation';
 
 class PainPoint extends React.PureComponent {
     componentWillMount() {
         // this.props.init();
+    }
+    handleClick = (e) => {
+        const time = e.name,value = e.value,country = this.props.selectedCountry;
+        this.props.reHref(time,value,country,this.props.navigation.navigate);
     }
     render() {
         const {secondChartData:chartData,handleWebViewLoad} = this.props;
@@ -18,7 +23,7 @@ class PainPoint extends React.PureComponent {
                     chartOption={chartData.option}
                     width={'100%'}
                     minHeight={380}
-                    // onClick={this.handleClick}
+                    onPress={this.handleClick}
                     onLoadEnd={handleWebViewLoad.bind(this,'secondChartData',true)}
                 />
             </View>
@@ -31,6 +36,10 @@ PainPoint = connect(state=>{
 },dispatch=>({
     init(){
         dispatch(action.loadSecondChart());
+    },
+    reHref(time,value,country,f){
+        dispatch({type:'APP_SWITCH_PAGE',activePage:42});
+        f('MasterPage',{activePage:'Dashboard4',time,value,country})
     }
 }))(PainPoint);
-export default PainPoint;
+export default withNavigation(PainPoint);

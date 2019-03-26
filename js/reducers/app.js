@@ -32,6 +32,7 @@ const defaultState = {
         {id:4,name:'Other',display:false,list:[
                 {id:40,name:'Dashboard2',icon:'bar-chart',module:'_dashboard2',display:false},
                 {id:41,name:'Dashboard3',icon:'bar-chart',module:'_dashboard3',display:false},
+                {id:42,name:'Dashboard4',icon:'bar-chart',module:'_dashboard4',display:false},
             ]}
     ]
 };

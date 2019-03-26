@@ -35,7 +35,7 @@ class Others extends React.Component{
                     selectedIndex={0}
                     // autoplay
                 >
-                    <LoadingScreen style={styles.subWrapper} show={!(first.data&&first.data.length&&first.webViewLoad)}>
+                    <LoadingScreen style={styles.subWrapper} show={!(JSON.stringify(first.option)!=='{}'&&first.webViewLoad)}>
                         <UserPortrait handleWebViewLoad={webViewLoad}/>
                     </LoadingScreen>
                     <LoadingScreen style={styles.subWrapper} show={!(second.data&&second.data.length&&second.webViewLoad)}>
