@@ -277,23 +277,36 @@ actions.loadFirstChart = (country) => dispatch => {
     dispatch({ type: 'HOME_FIRST_DATA', option });
 };
 actions.loadSecondChart = () => dispatch => {
-    let temp = ['内存不足', '屏幕分辨率低', '手机死机', '信号差', '续航短', '屏幕黑屏', '经常闪退', '触屏不灵敏', '音质差', '手机发烫'];
-    const option = {
-        title: '用户痛点',
-        legendData: []
-    };
-    let start = Math.floor(Math.random() * 10);
-    for (let i = 0; i < 5; i++) {
-        option.legendData.push(temp[(start + i * 2) % 10]);
-    }
-    const data = [
-        { value: Math.random() * 400, name: option.legendData[0] },
-        { value: 310, name: option.legendData[1] },
-        { value: 235, name: option.legendData[2] },
-        { value: 274, name: option.legendData[3] },
-        { value: 400, name: option.legendData[4] }
-    ];
-    dispatch({ type: 'HOME_SECOND_DATA', data, option });
+    ajax.get('/report/index/getPainSpotList',{},'http://63.33.199.83:8066').then(backData=>{
+        const option = {
+            title: '用户痛点',
+            legendData: []
+        };
+        option.legendData = backData.map((o,i)=>{
+            return o.name;
+        });
+        const data = backData.map((o,i)=>{
+            return {value:o.count,name:o.name}
+        });
+        dispatch({ type: 'HOME_SECOND_DATA', data, option });
+    })
+    // let temp = ['内存不足', '屏幕分辨率低', '手机死机', '信号差', '续航短', '屏幕黑屏', '经常闪退', '触屏不灵敏', '音质差', '手机发烫'];
+    // const option = {
+    //     title: '用户痛点',
+    //     legendData: []
+    // };
+    // let start = Math.floor(Math.random() * 10);
+    // for (let i = 0; i < 5; i++) {
+    //     option.legendData.push(temp[(start + i * 2) % 10]);
+    // }
+    // const data = [
+    //     { value: Math.random() * 400, name: option.legendData[0] },
+    //     { value: 310, name: option.legendData[1] },
+    //     { value: 235, name: option.legendData[2] },
+    //     { value: 274, name: option.legendData[3] },
+    //     { value: 400, name: option.legendData[4] }
+    // ];
+    // dispatch({ type: 'HOME_SECOND_DATA', data, option });
 };
 actions.loadThirdChart = () => dispatch => {
     const mockData = [

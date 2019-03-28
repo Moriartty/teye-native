@@ -38,6 +38,15 @@ export default class App extends Component {
                         NumScroll('#dataNums', {
                             deVal: parseInt("${this.state.activeNum}")
                         });
+                        if(${iosPlatform}){
+                            $('.dataNums .dataOne').css({'width':'4rem','height':'6rem'});
+                            $('.dataNums .tt span').css({'font':'bold 4rem/6rem "Arial"',color:'#ffc53d'});
+                            $('p.title').css('font','bold 3rem/4rem "Arial"');
+                        }
+                         NumScroll('#dataNums', {
+                            deVal: parseInt("${this.state.activeNum}")
+                        });
+
                     `}
                 />
             </View>

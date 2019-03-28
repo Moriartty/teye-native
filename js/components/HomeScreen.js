@@ -1,6 +1,6 @@
 // In App.js in a new project
 import React from "react";
-import { View, Text,Button,Image,TouchableOpacity } from "react-native";
+import { View, Text,Button,Image,TouchableOpacity,StyleSheet } from "react-native";
 import {connect} from 'react-redux';
 import {findTargetMenu} from "../utils/index";
 const theme = require('../config/theme');
@@ -62,8 +62,10 @@ class HomeScreen extends React.Component {
             headerLeft:
                 <TouchableOpacity onPress={navigation.getParam('handleNavClick',null)}>
                     <Image
-                        style={{marginLeft:10,width:24,height:24}}
-                        source={require('../../img/icon_threeline_fill.png')}
+                        style={styles.sidebarToggle}
+                        // style={{marginLeft:10,width:24,height:24}}
+                        // source={require('../../img/icon_threeline_fill.png')}
+                        source={{uri:'https://avatars0.githubusercontent.com/u/15435074?s=460&v=4'}}
                     />
                 </TouchableOpacity>,
             headerStyle:{
@@ -120,6 +122,17 @@ HomeScreen = connect(state=>{
         dispatch(action.loadFifthChart());
     }
 }))(HomeScreen);
+
+const styles = StyleSheet.create({
+    sidebarToggle:{
+        width:30,
+        height:30,
+        borderRadius:15,
+        borderWidth:1,
+        borderColor:'white',
+        marginLeft:10
+    }
+})
 
 export default HomeScreen;
 

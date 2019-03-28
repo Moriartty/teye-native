@@ -403,9 +403,8 @@ class UserPortrait extends React.PureComponent {
                 {/*/>*/}
                 <Echart
                     option={option}
-                    width={400}
-                    height={400}
-                    backgroundColor={'#000'}
+                    width={300}
+                    height={300}
                     onLoadEnd={handleWebViewLoad.bind(this,'firstChartData',true)}
                     // onLoadEnd={()=>console.log('fuck you')}
                 />

@@ -46,6 +46,9 @@ class ExChart extends React.Component{
             case 'customized-pie':
                 option = drawCustomizedPie(data, chartOption);
                 break;
+            case 'rose-chart':
+                option = drawRoseChart(data,chartOption);
+                break;
             case 'heat-map': //热力地图
                 option = drawHeatMap(data,chartOption,option.selectedCountry);
                 break;
@@ -211,6 +214,64 @@ function drawCustomizedPie (data, option) {
                 animationDelay: function (idx) {
                     return Math.random() * 200;
                 }
+            }
+        ]
+    };
+}
+
+function drawRoseChart(data,option){
+    return {
+        backgroundColor: backgroundColor,
+        title: {
+            text: option.title,
+            left: 'center',
+            top: 15,
+            textStyle: {
+                color: '#000'
+            }
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        toolbox: {
+            show : true,
+        },
+        calculable : true,
+        color:['#003a8c','#0050b3','#096dd9','#1890ff','#40a9ff','#69c0ff','#91d5ff'].reverse(),
+        series : [
+            {
+                name:'面积模式',
+                type:'pie',
+                radius : ['20%', '60%'],
+                // center : ['75%', '50%'],
+                center: ['50%', '60%'],
+                roseType : 'area',
+                label: {
+                    normal: {
+                        textStyle: {
+                            color: 'rgba(0, 0, 0, 1)'
+                        }
+                    }
+                },
+                labelLine: {
+                    normal: {
+                        lineStyle: {
+                            color: 'rgba(0, 0, 0, 1)'
+                        },
+                        smooth: 0.2,
+                        length: 5,
+                        length2: 5
+
+                    }
+                },
+                // itemStyle: {
+                //     normal: {
+                //         shadowBlur: 200,
+                //         shadowColor: 'rgba(0, 0, 0, 1)'
+                //     }
+                // },
+                data:data
             }
         ]
     };

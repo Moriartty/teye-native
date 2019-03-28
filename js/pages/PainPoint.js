@@ -18,7 +18,7 @@ class PainPoint extends React.PureComponent {
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 <ExChart
-                    opt={{ type: 'customized-pie' }}
+                    opt={{ type: 'rose-chart' }}
                     data={chartData.data}
                     chartOption={chartData.option}
                     width={'100%'}
