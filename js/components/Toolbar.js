@@ -19,7 +19,7 @@ class Toolbar extends React.Component{
         return (
             <View >
                 <ToolbarAndroid
-                    navIcon={require('../../img/icon_threeline_fill.png')}
+                    // navIcon={require('../../img/icon_threeline_fill.png')}
                     style={styles.toolbar}
                     title={'TEYE'}
                     titleColor={'#fff'}
